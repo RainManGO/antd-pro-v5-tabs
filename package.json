@@ -1,0 +1,47 @@
+{
+  "private": true,
+  "scripts": {
+    "start": "umi dev",
+    "build": "umi build",
+    "commit": "git-cz",
+    "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
+    "test": "umi-test",
+    "test:coverage": "umi-test --coverage",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -w -r 0",
+    "lint": "umi g tmp && npm run lint:js && npm run lint:style && npm run lint:prettier",
+    "lint-staged": "lint-staged",
+    "lint-staged:js": "eslint --ext .js,.jsx,.ts,.tsx ",
+    "lint:fix": "eslint --fix --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src && npm run lint:style",
+    "lint:js": "eslint --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src",
+    "lint:prettier": "prettier -c --write \"src/**/*\" --end-of-line auto",
+    "lint:style": "stylelint --fix \"src/**/*.less\" --syntax less",
+    "precommit": "lint-staged"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    }
+  },
+  "dependencies": {
+    "@ant-design/pro-layout": "^6.5.0",
+    "axios-mapper": "^0.5.6",
+    "react": "17.x",
+    "react-dom": "17.x",
+    "umi": "^3.5.13"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "@umijs/fabric": "^2.6.2",
+    "@umijs/preset-react": "1.x",
+    "@umijs/test": "^3.5.13",
+    "commitizen": "^4.2.4",
+    "cross-env": "^7.0.3",
+    "eslint": "^7.31.0",
+    "lint-staged": "^11.0.1",
+    "prettier": "^2.2.0",
+    "stylelint": "^13.13.1",
+    "typescript": "^4.1.2",
+    "yorkie": "^2.0.0"
+  }
+}
