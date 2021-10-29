@@ -2,7 +2,7 @@
  * @Author: ZY
  * @Date: 2021-07-22 10:26:28
  * @LastEditors: ZY
- * @LastEditTime: 2021-10-28 14:33:26
+ * @LastEditTime: 2021-10-29 14:20:21
  * @FilePath: /main/src/app.ts
  * @Description: 运行时文件
  */
@@ -53,12 +53,14 @@ function buildRoutes(routes: any) {
 }
 
 export function patchRoutes({ routes }: { routes: IRoute[] }) {
-  const pagesRoutes = routes[1].routes;
+  const pagesRoutes = routes[2].routes;
   const serverRoutes = buildRoutes(serviceRoutes);
   serverRoutes.forEach((route: any) => {
       pagesRoutes?.push(route);
   });
-  routes[1].routes = pagesRoutes;
+  routes[2].routes = pagesRoutes;
+  console.log(routes);
+  
 }
 
 export function render(oldRender: Function) {

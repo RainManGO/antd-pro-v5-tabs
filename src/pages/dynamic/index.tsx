@@ -2,8 +2,8 @@
  * @Author: ZY
  * @Date: 2021-08-13 10:22:36
  * @LastEditors: ZY
- * @LastEditTime: 2021-08-13 10:22:52
- * @FilePath: /fmis-budget-mrico-apps/main/src/pages/dynamic/index.tsx
+ * @LastEditTime: 2021-10-28 16:44:58
+ * @FilePath: /main/src/pages/dynamic/index.tsx
  * @Description: 文件描述
  */
 
@@ -12,6 +12,7 @@ import React from 'react';
  return (
      <div> 
          动态注册路由
+         <input></input>
     </div> 
     ); 
  } 

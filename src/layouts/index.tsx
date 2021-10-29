@@ -2,11 +2,11 @@
  * @Author: ZY
  * @Date: 2021-07-21 11:58:40
  * @LastEditors: ZY
- * @LastEditTime: 2021-10-28 14:17:06
+ * @LastEditTime: 2021-10-29 16:07:24
  * @FilePath: /main/src/layouts/index.tsx
  * @Description: 布局入口文件
  */
-import React, { useEffect, useState } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
 import layoutDefaultSettings from '../../config/layoutDefaultSettings';
 import type { ProSettings, BasicLayoutProps as ProLayoutProps } from '@ant-design/pro-layout';
@@ -16,13 +16,17 @@ import RightContent from '@/components/RightContent';
 import { Tabs } from 'antd';
 import { history, connect } from 'umi';
 import type { ConnectRC, Tag } from 'umi';
-// import _cloneDeep from 'lodash/cloneDeep'
+import Loadable from 'react-loadable';
+import { Route } from 'react-router-dom';
 
 const { TabPane } = Tabs;
 interface LayoutsType extends ProLayoutProps {
   tagsModel: Tag[];
   loading: boolean;
 }
+
+const Loading = () => <span>Loading...</span>;
+
 const IndexPage: ConnectRC<LayoutsType> = (props) => {
   const [settings, setSetting] = useState<Partial<ProSettings> | undefined>({ fixSiderbar: true });
   // const [keyWord, setKeyWord] = useState('');
@@ -37,12 +41,18 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
     }
   };
 
+  const tabOnChange = (activeKey: string) => {
+    const path =  props.tagsModel.filter((t)=>t.key === activeKey)
+    history.push(path[0].path ?? '/dashboard')
+    props.dispatch({ type: 'tagsModel/updateActive', payload: activeKey });
+  };
+
   const refresh = () => {
     const newTag: Tag = {
       key: `${Date.now().toString()}自定义`,
       title: '自定义菜单页',
       active: true,
-      path: '@/pages/dashboard',
+      path: '/dynamic',
     };
     props.dispatch({ type: 'tagsModel/addTag', payload: newTag });
     // window.location.href = 'http://localhost:8130/dashboard'
@@ -66,11 +76,35 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
   //     .filter((item) => item) as MenuDataItem[];
 
   useEffect(() => {
-    history.listen((location, action) => {
+
+    console.log(props.route.routes);
+    
+    const getTitleFromRoute = (path: string) => {
+      const route = props.route.routes?.filter((r) => r.path === path) ?? [];
+      return route[0].name;
+    };
+
+    history.listen((location) => {
       // location is an object like window.location
-      console.log(action, location.pathname, location.state);
+      props.dispatch({
+        type: 'tagsModel/addTag',
+        payload: {
+          key:
+            location.pathname === '/dashboard'
+              ? location.pathname
+              : `${getTitleFromRoute(location.pathname)}-${location.query}`,
+          title: getTitleFromRoute(location.pathname),
+          active: true,
+          path: location.pathname,
+        },
+      });
     });
   }, []);
+
+  const getPathComponent= (path: string)=>{
+      const r = props.route.routes?.filter((t)=>t.path === path)[0]
+      return (r as any).component
+  }
 
   // const filterRoute = ()=>{
   //   const newRoute = _cloneDeep(props.route)
@@ -79,6 +113,24 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
   //   console.log(newRoute);
   //   return  newRoute
   // }
+
+  /**
+   * @description: 获取选中的key
+   * @param {*}
+   * @return {*}
+   */
+  const getActiveKey = (tags: Tag[]) => {
+    return tags.filter((t) => t.active)[0].key;
+  };
+
+  // const getTabComponent = (path: string) => {
+  //   const TabComponent = Loadable({
+  //     loader: () => import(`@/pages${path}`),
+  //     loading: Loading,
+  //     delay: 150,
+  //   });
+  //   return <TabComponent />;
+  // };
 
   return (
     <div
@@ -148,12 +200,18 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
         rightContentRender={() => <RightContent></RightContent>}
       >
         <div id="myWrapperLoading">
-          <Tabs defaultActiveKey="1" type="editable-card" hideAdd={true} onEdit={tabOnEdit}>
+          <Tabs
+            activeKey={getActiveKey(props.tagsModel)}
+            type="editable-card"
+            hideAdd={true}
+            onEdit={tabOnEdit}
+            onChange={tabOnChange}
+          >
             {props.tagsModel &&
               props.tagsModel.map((tag) => {
                 return (
-                  <TabPane tab={tag.title} key={tag.key}>
-                    {props.children}
+                  <TabPane tab={tag.title} key={tag.key} closable={tag.key !== '/dashboard'}>
+                    <Route key={tag.key} component={getPathComponent(tag.path!)} exact />
                   </TabPane>
                 );
               })}
