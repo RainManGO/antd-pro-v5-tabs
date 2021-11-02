@@ -2,7 +2,7 @@
  * @Author: ZY
  * @Date: 2021-08-02 13:54:53
  * @LastEditors: ZY
- * @LastEditTime: 2021-11-01 14:14:59
+ * @LastEditTime: 2021-11-02 09:38:59
  * @FilePath: /main/config/routes.ts
  * @Description: 路由配置
  */
@@ -30,6 +30,7 @@ export default [
         icon: 'icon-facebook',
         component: '@/pages/detail',
         hidden: 'true',
+        access: 'canReadAdmin',
       },
       { path: '/rd', microApp:'rd',microAppProps: {
         autoSetLoading: true,

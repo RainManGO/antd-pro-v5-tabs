@@ -2,23 +2,21 @@
  * @Author: ZY
  * @Date: 2021-07-21 11:58:40
  * @LastEditors: ZY
- * @LastEditTime: 2021-11-01 15:51:38
+ * @LastEditTime: 2021-11-02 09:04:59
  * @FilePath: /main/src/layouts/index.tsx
  * @Description: 布局入口文件
  */
-import React, { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { connect } from 'umi';
+import { Link } from 'react-router-dom';
+import type { ConnectRC, Tag } from 'umi';
+import TabsView from "@/components/TabsView";
+import RightContent from '@/components/RightContent';
+import ProLayout, { SettingDrawer } from '@ant-design/pro-layout';
 import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
 import layoutDefaultSettings from '../../config/layoutDefaultSettings';
 import type { ProSettings, BasicLayoutProps as ProLayoutProps } from '@ant-design/pro-layout';
-import ProLayout, { SettingDrawer } from '@ant-design/pro-layout';
-import { Link } from 'react-router-dom';
-import RightContent from '@/components/RightContent';
-import { Tabs } from 'antd';
-import { history, connect } from 'umi';
-import type { ConnectRC, Tag } from 'umi';
-import { Route } from 'react-router-dom';
 
-const { TabPane } = Tabs;
 interface LayoutsType extends ProLayoutProps {
   tagsModel: Tag[];
   loading: boolean;
@@ -27,62 +25,7 @@ interface LayoutsType extends ProLayoutProps {
 const IndexPage: ConnectRC<LayoutsType> = (props) => {
   const [settings, setSetting] = useState<Partial<ProSettings> | undefined>({ fixSiderbar: true });
   const [collapsed, setCollapsed] = useState(false);
-
-  const tabOnEdit = (
-    targetKey: React.MouseEvent | React.KeyboardEvent | string,
-    action: 'add' | 'remove',
-  ) => {
-    if (action === 'remove') {
-      props.dispatch({ type: 'tagsModel/removeTag', payload: targetKey });
-    }
-  };
-
-  const tabOnChange = (activeKey: string) => {
-    const path =  props.tagsModel.filter((t)=>t.key === activeKey)
-    history.push(path[0].path ?? '/dashboard')
-    props.dispatch({ type: 'tagsModel/updateActive', payload: activeKey });
-  };
-
-  const refresh = () => {
-    
-  };
-
-  useEffect(() => {
-    const getTitleFromRoute = (path: string) => {
-      const route = props.route.routes?.filter((r) => {
-        // 如果是动态路由，匹配非动态部分
-        if (r.path?.includes(':')) {
-          return path.includes(r.path.split(':')[0])
-        }
-        return r.path === path
-      }) ?? [];
-      return route[0].name;
-    };
-
-    history.listen((location) => {
-      // location is an object like window.location
-      props.dispatch({
-        type: 'tagsModel/addTag',
-        payload: {
-          key:location.pathname,
-          title: getTitleFromRoute(location.pathname),
-          active: true,
-          path: location.pathname,
-        },
-      });
-    });
-  }, []);
-
-  const getPathComponent= (path: string)=>{
-      const r = props.route.routes?.filter((t)=>{
-         // 如果是动态路由，匹配非动态部分
-         if (t.path?.includes(':')) {
-          return path.includes(t.path.split(':')[0])
-        }
-        return t.path === path
-      })[0]
-      return (r as any).component
-  }
+  const refresh = () => {};
 
   /**
    * @description: 获取选中的key
@@ -152,22 +95,13 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
         rightContentRender={() => <RightContent></RightContent>}
       >
         <div id="myWrapperLoading">
-          <Tabs
+          <TabsView
             activeKey={getActiveKey(props.tagsModel)}
-            type="editable-card"
-            hideAdd={true}
-            onEdit={tabOnEdit}
-            onChange={tabOnChange}
+            tags={props.tagsModel}
+            route={props.route}
+            dispatch={props.dispatch}
           >
-            {props.tagsModel &&
-              props.tagsModel.map((tag) => {
-                return (
-                  <TabPane tab={tag.title} key={tag.key} closable={tag.key !== '/dashboard'}>
-                    <Route key={tag.key} component={getPathComponent(tag.path!)} exact />
-                  </TabPane>
-                );
-              })}
-          </Tabs>
+          </TabsView>
         </div>
       </ProLayout>
       <SettingDrawer

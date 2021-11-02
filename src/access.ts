@@ -8,7 +8,6 @@
  */
 
 export default function(initialState: any) {
-    debugger
     const {role} = initialState.currentUser;
     
     return {

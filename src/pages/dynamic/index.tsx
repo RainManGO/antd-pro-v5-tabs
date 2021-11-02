@@ -7,11 +7,10 @@
  * @Description: 文件描述
  */
 
-import React from 'react';
 import { Button } from 'antd';
 import { history } from 'umi';
 
-const IndexPage: React.FC<{}> = (props) => {
+const IndexPage = () => {
 
   const openFormDetail = () => {
     history.push(`/detail/0`);

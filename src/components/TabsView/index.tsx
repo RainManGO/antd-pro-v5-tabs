@@ -2,12 +2,12 @@
  * @Author: ZY
  * @Date: 2021-11-01 15:55:26
  * @LastEditors: ZY
- * @LastEditTime: 2021-11-01 18:04:23
+ * @LastEditTime: 2021-11-02 08:58:36
  * @FilePath: /main/src/components/TabsView/index.tsx
  * @Description: 选项卡标签
  */
 
-import React from 'react';
+import React,{useEffect} from 'react';
 import type { Tag ,Dispatch,IRoute} from 'umi';
 import { Tabs } from 'antd';
 import { Route } from 'react-router-dom';
@@ -24,6 +24,33 @@ const { TabPane } = Tabs;
 
 const IndexPage: React.FC<TabsViewProps> = (props) => {
   const { tags, activeKey ,dispatch,route} = props;
+
+
+  useEffect(() => {
+    const getTitleFromRoute = (path: string) => {
+      const titleRoute= props.route.routes?.filter((r) => {
+        // 如果是动态路由，匹配非动态部分
+        if (r.path?.includes(':')) {
+          return path.includes(r.path.split(':')[0])
+        }
+        return r.path === path
+      }) ?? [];
+      return titleRoute[0].name;
+    };
+
+    history.listen((location) => {
+      // location is an object like window.location
+      dispatch({
+        type: 'tagsModel/addTag',
+        payload: {
+          key:location.pathname,
+          title: getTitleFromRoute(location.pathname),
+          active: true,
+          path: location.pathname,
+        },
+      });
+    });
+  }, []);
 
   const tabOnEdit = (
     targetKey: React.MouseEvent | React.KeyboardEvent | string,
