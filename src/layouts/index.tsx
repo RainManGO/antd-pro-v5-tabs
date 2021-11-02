@@ -2,11 +2,11 @@
  * @Author: ZY
  * @Date: 2021-07-21 11:58:40
  * @LastEditors: ZY
- * @LastEditTime: 2021-10-29 16:07:24
+ * @LastEditTime: 2021-11-01 15:51:38
  * @FilePath: /main/src/layouts/index.tsx
  * @Description: 布局入口文件
  */
-import React, { Component, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
 import layoutDefaultSettings from '../../config/layoutDefaultSettings';
 import type { ProSettings, BasicLayoutProps as ProLayoutProps } from '@ant-design/pro-layout';
@@ -16,7 +16,6 @@ import RightContent from '@/components/RightContent';
 import { Tabs } from 'antd';
 import { history, connect } from 'umi';
 import type { ConnectRC, Tag } from 'umi';
-import Loadable from 'react-loadable';
 import { Route } from 'react-router-dom';
 
 const { TabPane } = Tabs;
@@ -25,11 +24,8 @@ interface LayoutsType extends ProLayoutProps {
   loading: boolean;
 }
 
-const Loading = () => <span>Loading...</span>;
-
 const IndexPage: ConnectRC<LayoutsType> = (props) => {
   const [settings, setSetting] = useState<Partial<ProSettings> | undefined>({ fixSiderbar: true });
-  // const [keyWord, setKeyWord] = useState('');
   const [collapsed, setCollapsed] = useState(false);
 
   const tabOnEdit = (
@@ -48,39 +44,18 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
   };
 
   const refresh = () => {
-    const newTag: Tag = {
-      key: `${Date.now().toString()}自定义`,
-      title: '自定义菜单页',
-      active: true,
-      path: '/dynamic',
-    };
-    props.dispatch({ type: 'tagsModel/addTag', payload: newTag });
-    // window.location.href = 'http://localhost:8130/dashboard'
+    
   };
 
-  // const filterByMenuDate = (data: MenuDataItem[], words: string): MenuDataItem[] =>
-  //   data
-  //     .map((item) => {
-  //       if (
-  //         (item.name && item.name.includes(words)) ||
-  //         filterByMenuDate(item.children || [], words).length > 0
-  //       ) {
-  //         return {
-  //           ...item,
-  //           children: filterByMenuDate(item.children || [], words),
-  //         };
-  //       }
-
-  //       return undefined;
-  //     })
-  //     .filter((item) => item) as MenuDataItem[];
-
   useEffect(() => {
-
-    console.log(props.route.routes);
-    
     const getTitleFromRoute = (path: string) => {
-      const route = props.route.routes?.filter((r) => r.path === path) ?? [];
+      const route = props.route.routes?.filter((r) => {
+        // 如果是动态路由，匹配非动态部分
+        if (r.path?.includes(':')) {
+          return path.includes(r.path.split(':')[0])
+        }
+        return r.path === path
+      }) ?? [];
       return route[0].name;
     };
 
@@ -89,10 +64,7 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
       props.dispatch({
         type: 'tagsModel/addTag',
         payload: {
-          key:
-            location.pathname === '/dashboard'
-              ? location.pathname
-              : `${getTitleFromRoute(location.pathname)}-${location.query}`,
+          key:location.pathname,
           title: getTitleFromRoute(location.pathname),
           active: true,
           path: location.pathname,
@@ -102,17 +74,15 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
   }, []);
 
   const getPathComponent= (path: string)=>{
-      const r = props.route.routes?.filter((t)=>t.path === path)[0]
+      const r = props.route.routes?.filter((t)=>{
+         // 如果是动态路由，匹配非动态部分
+         if (t.path?.includes(':')) {
+          return path.includes(t.path.split(':')[0])
+        }
+        return t.path === path
+      })[0]
       return (r as any).component
   }
-
-  // const filterRoute = ()=>{
-  //   const newRoute = _cloneDeep(props.route)
-  //   console.log(newRoute);
-  //   newRoute.routes = newRoute.routes?.filter((r: any)=>r.hidden !== 'true')
-  //   console.log(newRoute);
-  //   return  newRoute
-  // }
 
   /**
    * @description: 获取选中的key
@@ -122,15 +92,6 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
   const getActiveKey = (tags: Tag[]) => {
     return tags.filter((t) => t.active)[0].key;
   };
-
-  // const getTabComponent = (path: string) => {
-  //   const TabComponent = Loadable({
-  //     loader: () => import(`@/pages${path}`),
-  //     loading: Loading,
-  //     delay: 150,
-  //   });
-  //   return <TabComponent />;
-  // };
 
   return (
     <div
@@ -142,7 +103,6 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
       <ProLayout
         {...settings}
         {...layoutDefaultSettings}
-        // headerContentRender={() => <ProBreadcrumb />}
         collapsed={collapsed}
         menuHeaderRender={() => {
           if (collapsed) {
@@ -164,29 +124,22 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
             </div>
           );
         }}
-        // menuItemRender={(menuItemProps, defaultDom) => {
-        //   return (
-        //     <a href={menuItemProps.path} >
-        //       {defaultDom}
-        //     </a>
-        //   );
-        // }}
         menuItemRender={(menuItemProps, defaultDom) => {
           return <Link to={menuItemProps.path ?? '/'}>{defaultDom}</Link>;
         }}
         route={props.route}
-        menuExtraRender={({ collapsed }) => {
+        menuExtraRender={(menu) => {
           return (
-            !collapsed && (
+            !menu.collapsed && (
               <div style={{ color: 'white', textAlign: 'center', background: 'blue' }}>
                 我要制单
               </div>
             )
           );
         }}
-        menuFooterRender={({ collapsed }) => {
+        menuFooterRender={(menu) => {
           return (
-            !collapsed && (
+            !menu?.collapsed && (
               <div
                 onClick={refresh}
                 style={{ color: 'white', textAlign: 'center', background: 'blue' }}
@@ -196,7 +149,6 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
             )
           );
         }}
-        // postMenuData={(menus) => filterByMenuDate(menus || [], keyWord)}
         rightContentRender={() => <RightContent></RightContent>}
       >
         <div id="myWrapperLoading">
@@ -216,13 +168,9 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
                 );
               })}
           </Tabs>
-          {/* {props.children} */}
-
-          {/* <TagView children={props.children} home="/dashboard" /> */}
         </div>
       </ProLayout>
       <SettingDrawer
-        // pathname={pathname}
         getContainer={() => document.getElementById('test-pro-layout')}
         settings={settings}
         onSettingChange={(changeSetting) => {

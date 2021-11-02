@@ -2,7 +2,7 @@
  * @Author: ZY
  * @Date: 2021-10-25 13:42:43
  * @LastEditors: ZY
- * @LastEditTime: 2021-10-29 16:06:40
+ * @LastEditTime: 2021-11-01 17:26:52
  * @FilePath: /main/src/models/tagsModel.ts
  * @Description: dva tags
  * tabs 整理设计思路：
@@ -102,9 +102,11 @@ const TagsModel: TagsModelType = {
       }
       const ct = _cloneDeep(state);
       if (ct.filter((t) => t.active)[0].key === action.payload) {
-        // 如果关闭的是当前选中的标签，默认选中最后一个的策略
         _remove(ct, (tag: Tag) => tag.key === action.payload);
+        // 如果关闭的是当前选中的标签，默认选中最后一个的策略
         ct[ct.length - 1].active = true;
+      }else{
+        _remove(ct, (tag: Tag) => tag.key === action.payload);
       }
       return [...ct];
     },
