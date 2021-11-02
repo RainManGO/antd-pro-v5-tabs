@@ -2,7 +2,7 @@
  * @Author: ZY
  * @Date: 2021-11-01 15:55:26
  * @LastEditors: ZY
- * @LastEditTime: 2021-11-02 08:58:36
+ * @LastEditTime: 2021-11-02 10:24:45
  * @FilePath: /main/src/components/TabsView/index.tsx
  * @Description: 选项卡标签
  */
@@ -35,7 +35,11 @@ const IndexPage: React.FC<TabsViewProps> = (props) => {
         }
         return r.path === path
       }) ?? [];
-      return titleRoute[0].name;
+      // 没有权限的页面访问不到
+      if (titleRoute[0].unaccessible === true) {
+        return "权限页面"
+    }
+      return  titleRoute[0].name
     };
 
     history.listen((location) => {
