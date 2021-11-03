@@ -1,10 +1,12 @@
-import { Space, Row, Col } from 'antd';
-import { QuestionCircleOutlined } from '@ant-design/icons';
+import { Space, Row, Col, Badge } from 'antd';
 import React from 'react';
 import { useModel } from 'umi';
-import Avatar from './AvatarDropdown';
+import AvatarSelf from './AvatarDropdown';
 import HeaderSearch from '../HeaderSearch';
 import styles from './index.less';
+import imgMessage from '@/assets/message.png';
+import imgSetting from '@/assets/setting.png';
+import Weather from './Weather';
 
 export type SiderTheme = 'light' | 'dark';
 
@@ -54,16 +56,26 @@ const GlobalHeaderRight: React.FC = () => {
           />
         </Col>
         <Col span={12}>
-          <Space className={className}>
-            <span
-              className={styles.action}
-              onClick={() => {
-                window.open('https://pro.ant.design/docs/getting-started');
-              }}
-            >
-              <QuestionCircleOutlined />
-            </span>
-            <Avatar />
+          <Space className={className} size={'large'}>
+            <div className="weather">
+              <Weather
+                weather={{
+                  temperature: 18,
+                  address: '北京',
+                  description: '多云转晴',
+                  date: '2021年10月28日',
+                }}
+              />
+            </div>
+            <div className={styles.message}>
+              <Badge count={5}>
+                <img src={imgMessage} alt="加载失败..." />
+              </Badge>
+            </div>
+            <div className={styles.setting}>
+              <img src={imgSetting} alt="加载失败..." />
+            </div>
+            <AvatarSelf />
           </Space>
         </Col>
       </Row>
