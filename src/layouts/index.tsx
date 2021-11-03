@@ -10,12 +10,16 @@ import { useState } from 'react';
 import { connect } from 'umi';
 import { Link } from 'react-router-dom';
 import type { ConnectRC, Tag } from 'umi';
-import TabsView from "@/components/TabsView";
+import TabsView from '@/components/TabsView';
 import RightContent from '@/components/RightContent';
 import ProLayout, { SettingDrawer } from '@ant-design/pro-layout';
 import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
 import layoutDefaultSettings from '../../config/layoutDefaultSettings';
 import type { ProSettings, BasicLayoutProps as ProLayoutProps } from '@ant-design/pro-layout';
+import './index.less';
+import logo from '@/assets/logo.png';
+import logoFont from '@/assets/logoFont.png';
+import zhidan from '@/assets/zhidan.png';
 
 interface LayoutsType extends ProLayoutProps {
   tagsModel: Tag[];
@@ -49,9 +53,18 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
         collapsed={collapsed}
         menuHeaderRender={() => {
           if (collapsed) {
-            return <div>中石油</div>;
+            return (
+              <div className="collapsed-logo">
+                <img src={logo} alt="logo未加载" />
+              </div>
+            );
           }
-          return <div>哈哈哈</div>;
+          return (
+            <div className="menu-logo">
+              <img src={logo} alt="logo未加载" />
+              <img src={logoFont} alt="logo未加载" />
+            </div>
+          );
         }}
         headerContentRender={() => {
           return (
@@ -74,8 +87,9 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
         menuExtraRender={(menu) => {
           return (
             !menu.collapsed && (
-              <div style={{ color: 'white', textAlign: 'center', background: 'blue' }}>
-                我要制单
+              <div className="zhidan">
+                <img src={zhidan} alt="" />
+                <p>我要制单</p>
               </div>
             )
           );
@@ -100,8 +114,7 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
             tags={props.tagsModel}
             route={props.route}
             dispatch={props.dispatch}
-          >
-          </TabsView>
+          ></TabsView>
         </div>
       </ProLayout>
       <SettingDrawer
