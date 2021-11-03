@@ -20,6 +20,7 @@ import './index.less';
 import logo from '@/assets/logo.png';
 import logoFont from '@/assets/logoFont.png';
 import zhidan from '@/assets/zhidan.png';
+import bottomMenuNav from '@/assets/bottomMenuNav.png';
 
 interface LayoutsType extends ProLayoutProps {
   tagsModel: Tag[];
@@ -88,7 +89,7 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
           return (
             !menu.collapsed && (
               <div className="zhidan">
-                <img src={zhidan} alt="" />
+                <img src={zhidan} alt="加载失败..." />
                 <p>我要制单</p>
               </div>
             )
@@ -97,11 +98,11 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
         menuFooterRender={(menu) => {
           return (
             !menu?.collapsed && (
-              <div
-                onClick={refresh}
-                style={{ color: 'white', textAlign: 'center', background: 'blue' }}
-              >
-                自定义菜单
+              <div onClick={refresh} className="bottomNav">
+                <div className="bottomNavWrap">
+                  <img src={bottomMenuNav} alt="加载失败..." />
+                  自定义导航
+                </div>
               </div>
             )
           );
