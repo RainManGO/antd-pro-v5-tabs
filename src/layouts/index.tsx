@@ -54,11 +54,7 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
         collapsed={collapsed}
         menuHeaderRender={() => {
           if (collapsed) {
-            return (
-              <div className="collapsed-logo">
-                <img src={logo} alt="logo未加载" />
-              </div>
-            );
+            return <img src={logo} alt="logo未加载" />;
           }
           return (
             <div className="menu-logo">
@@ -89,8 +85,11 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
           return (
             !menu.collapsed && (
               <div className="zhidan">
-                <img src={zhidan} alt="加载失败..." />
-                <p>我要制单</p>
+                <div>
+                  <img src={zhidan} alt="加载失败..." />
+                  <p>我要制单</p>
+                </div>
+                <div style={{ border: '1px solid gray', opacity: '0.3' }} />
               </div>
             )
           );
@@ -107,7 +106,7 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
             )
           );
         }}
-        rightContentRender={() => <RightContent></RightContent>}
+        rightContentRender={() => <RightContent />}
       >
         <div id="myWrapperLoading">
           <TabsView
