@@ -21,6 +21,7 @@ import logo from '@/assets/logo.png';
 import logoFont from '@/assets/logoFont.png';
 import zhidan from '@/assets/zhidan.png';
 import bottomMenuNav from '@/assets/bottomMenuNav.png';
+import CustomNav from './components/CustomNav';
 
 interface LayoutsType extends ProLayoutProps {
   tagsModel: Tag[];
@@ -30,6 +31,8 @@ interface LayoutsType extends ProLayoutProps {
 const IndexPage: ConnectRC<LayoutsType> = (props) => {
   const [settings, setSetting] = useState<Partial<ProSettings> | undefined>({ fixSiderbar: true });
   const [collapsed, setCollapsed] = useState(false);
+  const [customNav, setCustomNav] = useState<boolean>(true);
+
   const refresh = () => {};
 
   /**
@@ -100,10 +103,20 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
         menuFooterRender={(menu) => {
           return (
             <div onClick={refresh} className={`bottomNav ${menu?.collapsed ? 'closed' : 'open'}`}>
-              <div className={'position'}>
+              <div
+                className={'position'}
+                onClick={() => {
+                  setCustomNav(!customNav);
+                }}
+              >
                 <img src={bottomMenuNav} alt="加载失败..." />
                 {!menu?.collapsed && '自定义导航'}
               </div>
+              {customNav && (
+                <div className="custom-nav-wrap">
+                  <CustomNav data={1} />
+                </div>
+              )}
             </div>
           );
         }}
