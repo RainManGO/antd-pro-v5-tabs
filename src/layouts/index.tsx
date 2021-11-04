@@ -53,13 +53,10 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
         {...layoutDefaultSettings}
         collapsed={collapsed}
         menuHeaderRender={() => {
-          if (collapsed) {
-            return <img src={logo} alt="logo未加载" />;
-          }
           return (
-            <div className="menu-logo">
+            <div className={`menu-logo ${collapsed ? 'closed' : 'open'}`}>
               <img src={logo} alt="logo未加载" />
-              <img src={logoFont} alt="logo未加载" />
+              {!collapsed && <img src={logoFont} alt="logo未加载" />}
             </div>
           );
         }}
@@ -83,27 +80,31 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
         route={props.route}
         menuExtraRender={(menu) => {
           return (
-            !menu.collapsed && (
+            <div className="custom">
               <div className="zhidan">
-                <div>
+                <div className={menu.collapsed ? 'closed' : 'open'}>
                   <img src={zhidan} alt="加载失败..." />
-                  <p>我要制单</p>
+                  {!menu.collapsed && <p>我要制单</p>}
                 </div>
-                <div style={{ border: '1px solid gray', opacity: '0.3' }} />
               </div>
-            )
+              <div className={`divider ${menu?.collapsed ? 'closed' : 'open'}`} />
+              <div className={`all-function ${menu?.collapsed ? 'closed' : 'open'}`}>
+                <div className={'position'}>
+                  <img src={bottomMenuNav} alt="加载失败..." />
+                  {!menu?.collapsed && '全部功能'}
+                </div>
+              </div>
+            </div>
           );
         }}
         menuFooterRender={(menu) => {
           return (
-            !menu?.collapsed && (
-              <div onClick={refresh} className="bottomNav">
-                <div className="bottomNavWrap">
-                  <img src={bottomMenuNav} alt="加载失败..." />
-                  自定义导航
-                </div>
+            <div onClick={refresh} className={`bottomNav ${menu?.collapsed ? 'closed' : 'open'}`}>
+              <div className={'position'}>
+                <img src={bottomMenuNav} alt="加载失败..." />
+                {!menu?.collapsed && '自定义导航'}
               </div>
-            )
+            </div>
           );
         }}
         rightContentRender={() => <RightContent />}

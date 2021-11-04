@@ -11,7 +11,7 @@ import type { BasicLayoutProps } from '@ant-design/pro-layout';
 
 const layoutDefaultSettings: BasicLayoutProps = {
   title: false,
-  siderWidth: 235,
+  siderWidth: 228,
   iconfontUrl: '//at.alicdn.com/t/font_8d5l8fzk5b87iudi.js',
   collapsedButtonRender: false,
   // 拂晓蓝
