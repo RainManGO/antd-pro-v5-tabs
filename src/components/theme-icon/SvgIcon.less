@@ -1,0 +1,61 @@
+.biSvgIcon {
+  display: inline-block;
+  // vertical-align: middle;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.biSvgIcon svg {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  vertical-align: top;
+  background-size: cover;
+  fill: currentColor;
+  stroke: var(--userThemelogoColor); //currentColor;
+}
+
+.signOut {
+  width: 38px;
+  height: 38px;
+}
+
+.cancellationTheme {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin: 0;
+  vertical-align: center;
+  span {
+    // vertical-align: center;
+    display: flex;
+    align-items: center;
+    //padding: 5px 0;
+    color: var(--graphTitleColor);
+    font-size: 0.17rem;
+    cursor: pointer;
+    //line-height: 0.1875rem;
+    // &:hover {
+    //   //color: #1890FF;
+    // }
+    span {
+      flex-direction: row;
+    }
+  }
+}
+
+.outline {
+  padding-right: 8px;
+  font-size: 0.175rem !important;
+}
+.namespace {
+  .ant-popover-inner-content {
+    background-color: var(--popoverBgColor) !important;
+  }
+  .ant-popover-arrow {
+    border-top-color: var(--popoverBgColor) !important;
+    border-left-color: var(--popoverBgColor) !important;
+  }
+}

@@ -1,31 +1,43 @@
 /*
  * @Author: ZY
  * @Date: 2021-07-21 11:58:40
- * @LastEditors: ZY
- * @LastEditTime: 2021-11-02 09:04:59
- * @FilePath: /main/src/layouts/index.tsx
+ * @LastEditors: ZLL
+ * @LastEditTime: 2021-11-03 16:07:50
+ * @FilePath: \main\src\layouts\index.tsx
  * @Description: 布局入口文件
  */
+// @ts-nocheck
 import { useState } from 'react';
 import { connect } from 'umi';
 import { Link } from 'react-router-dom';
 import type { ConnectRC, Tag } from 'umi';
-import TabsView from "@/components/TabsView";
+import TabsView from '@/components/TabsView';
 import RightContent from '@/components/RightContent';
 import ProLayout, { SettingDrawer } from '@ant-design/pro-layout';
 import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
 import layoutDefaultSettings from '../../config/layoutDefaultSettings';
 import type { ProSettings, BasicLayoutProps as ProLayoutProps } from '@ant-design/pro-layout';
+//主题
+import whiteTheme from '@/themes/whiteTheme.ts';
+import blackTheme from '@/themes/blackTheme.ts';
+import '@/themes/theme.less';
 
+//样式
+import './index.less';
 interface LayoutsType extends ProLayoutProps {
   tagsModel: Tag[];
   loading: boolean;
 }
 
 const IndexPage: ConnectRC<LayoutsType> = (props) => {
+  console.log('props', props);
+
   const [settings, setSetting] = useState<Partial<ProSettings> | undefined>({ fixSiderbar: true });
   const [collapsed, setCollapsed] = useState(false);
+  const [theme, setTheme] = useState(localStorage.getItem('selectedTheme') ?? 'black');
   const refresh = () => {};
+
+  getThemeStyle();
 
   /**
    * @description: 获取选中的key
@@ -36,6 +48,18 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
     return tags.filter((t) => t.active)[0].key;
   };
 
+  function getThemeStyle() {
+    const themeStyle1 = theme == 'black' ? blackTheme : whiteTheme;
+    themeStyle1.forEach((item: any) => {
+      document.body.style.setProperty(item.property, item.value);
+    });
+  }
+
+  function changeTheme(themes: any) {
+    console.log('themes', themes);
+    setTheme(themes);
+    getThemeStyle();
+  }
   return (
     <div
       id="test-pro-layout"
@@ -92,7 +116,7 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
             )
           );
         }}
-        rightContentRender={() => <RightContent></RightContent>}
+        rightContentRender={() => <RightContent changeTheme={changeTheme} theme={theme} />}
       >
         <div id="myWrapperLoading">
           <TabsView
@@ -100,8 +124,7 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
             tags={props.tagsModel}
             route={props.route}
             dispatch={props.dispatch}
-          >
-          </TabsView>
+          />
         </div>
       </ProLayout>
       <SettingDrawer
