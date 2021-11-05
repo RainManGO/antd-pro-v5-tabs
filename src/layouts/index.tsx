@@ -44,6 +44,53 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
     return tags.filter((t) => t.active)[0].key;
   };
 
+  const changeCustomNav = (flag: boolean) => {
+    setCustomNav(flag);
+  };
+
+  const customNavData = [
+    {
+      title: '采购报销',
+      items: [
+        '费用报销单1',
+        '功能名称功能名称2',
+        '功能名称功能名称3',
+        '功能名称功能名称4',
+        '功能名称功能名称5',
+      ],
+    },
+    {
+      title: '商旅服务',
+      items: [
+        '费用报销单6',
+        '功能名称功能名称7',
+        '功能名称功能名称8',
+        '功能名称功能名称9',
+        '功能名称功能名称10',
+      ],
+    },
+    {
+      title: '销售业务',
+      items: [
+        '费用报销单11',
+        '功能名称功能名称12',
+        '功能名称功能名称13',
+        '功能名称功能名称14',
+        '功能名称功能名称15',
+      ],
+    },
+    {
+      title: '总账业务',
+      items: [
+        '费用报销单16',
+        '功能名称功能名称17',
+        '功能名称功能名称18',
+        '功能名称功能名称19',
+        '功能名称功能名称20',
+      ],
+    },
+  ];
+
   return (
     <div
       id="test-pro-layout"
@@ -106,7 +153,7 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
               <div
                 className={'position'}
                 onClick={() => {
-                  setCustomNav(!customNav);
+                  changeCustomNav(true);
                 }}
               >
                 <img src={bottomMenuNavImg} alt="加载失败..." />
@@ -114,7 +161,7 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
               </div>
               {customNav && (
                 <div className="custom-nav-wrap">
-                  <CustomNav data={1} />
+                  <CustomNav isClose={changeCustomNav} data={customNavData} />
                 </div>
               )}
             </div>
