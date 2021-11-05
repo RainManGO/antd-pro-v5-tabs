@@ -17,10 +17,10 @@ import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
 import layoutDefaultSettings from '../../config/layoutDefaultSettings';
 import type { ProSettings, BasicLayoutProps as ProLayoutProps } from '@ant-design/pro-layout';
 import './index.less';
-import logo from '@/assets/logo.png';
-import logoFont from '@/assets/logoFont.png';
-import zhidan from '@/assets/zhidan.png';
-import bottomMenuNav from '@/assets/bottomMenuNav.png';
+import logoImg from '@/assets/logo.png';
+import logoFontImg from '@/assets/logoFont.png';
+import addPrepareImg from '@/assets/addPrepare.png';
+import bottomMenuNavImg from '@/assets/bottomMenuNav.png';
 import CustomNav from './components/CustomNav';
 
 interface LayoutsType extends ProLayoutProps {
@@ -58,8 +58,8 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
         menuHeaderRender={() => {
           return (
             <div className={`menu-logo ${collapsed ? 'closed' : 'open'}`}>
-              <img src={logo} alt="logo未加载" />
-              {!collapsed && <img src={logoFont} alt="logo未加载" />}
+              <img src={logoImg} alt="logo未加载" />
+              {!collapsed && <img src={logoFontImg} alt="logo未加载" />}
             </div>
           );
         }}
@@ -86,14 +86,14 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
             <div className="custom">
               <div className="zhidan">
                 <div className={menu.collapsed ? 'closed' : 'open'}>
-                  <img src={zhidan} alt="加载失败..." />
+                  <img src={addPrepareImg} alt="加载失败..." />
                   {!menu.collapsed && <p>我要制单</p>}
                 </div>
               </div>
               <div className={`divider ${menu?.collapsed ? 'closed' : 'open'}`} />
               <div className={`all-function ${menu?.collapsed ? 'closed' : 'open'}`}>
                 <div className={'position'}>
-                  <img src={bottomMenuNav} alt="加载失败..." />
+                  <img src={bottomMenuNavImg} alt="加载失败..." />
                   {!menu?.collapsed && '全部功能'}
                 </div>
               </div>
@@ -109,7 +109,7 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
                   setCustomNav(!customNav);
                 }}
               >
-                <img src={bottomMenuNav} alt="加载失败..." />
+                <img src={bottomMenuNavImg} alt="加载失败..." />
                 {!menu?.collapsed && '自定义导航'}
               </div>
               {customNav && (
