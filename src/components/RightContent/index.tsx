@@ -1,23 +1,26 @@
 /*
  * @Author: ZLL
- * @Date: 2021-11-02 09:51:42
+ * @Date: 2021-11-05 15:39:41
  * @LastEditors: ZLL
- * @LastEditTime: 2021-11-02 11:31:06
+ * @LastEditTime: 2021-11-05 15:42:09
  * @FilePath: \main\src\components\RightContent\index.tsx
  * @Description: 文件描述
  */
-import { Space } from 'antd';
-import { QuestionCircleOutlined } from '@ant-design/icons';
+import { Space, Row, Col, Badge } from 'antd';
 import React from 'react';
-import { useModel, SelectLang } from 'umi';
-import Avatar from './AvatarDropdown';
+import { useModel } from 'umi';
+import AvatarSelf from './AvatarDropdown';
 import HeaderSearch from '../HeaderSearch';
 import styles from './index.less';
-import ThemeIcon from '../theme-icon';
+// import ThemeIcon from '../theme-icon';
+import imgMessage from '@/assets/message.png';
+import imgSetting from '@/assets/setting.png';
+import Weather from './Weather';
+
 export type SiderTheme = 'light' | 'dark';
 
-const GlobalHeaderRight: React.FC<{ changeTheme: any; theme: string }> = (props) => {
-  const { changeTheme, theme } = props;
+const GlobalHeaderRight: React.FC<{ changeTheme: any; theme: string }> = () => {
+  // const { changeTheme, theme } = props;
   const { initialState } = useModel('@@initialState');
 
   if (!initialState || !initialState.settings) {
@@ -31,51 +34,62 @@ const GlobalHeaderRight: React.FC<{ changeTheme: any; theme: string }> = (props)
     className = `${styles.right}  ${styles.dark}`;
   }
   return (
-    <Space className={className}>
-      <HeaderSearch
-        className={`${styles.action} ${styles.search}`}
-        placeholder="站内搜索"
-        defaultValue="umi ui"
-        options={[
-          { label: <a href="https://umijs.org/zh/guide/umi-ui.html">umi ui</a>, value: 'umi ui' },
-          {
-            label: <a href="next.ant.design">Ant Design</a>,
-            value: 'Ant Design',
-          },
-          {
-            label: <a href="https://protable.ant.design/">Pro Table</a>,
-            value: 'Pro Table',
-          },
-          {
-            label: <a href="https://prolayout.ant.design/">Pro Layout</a>,
-            value: 'Pro Layout',
-          },
-        ]}
-        // onSearch={value => {
-        //   console.log('input', value);
-        // }}
-      />
-      <span
-        className={styles.action}
-        onClick={() => {
-          window.open('https://pro.ant.design/docs/getting-started');
-        }}
-      >
-        <QuestionCircleOutlined />
-      </span>
-      <Avatar />
-      <SelectLang className={styles.action} />
-      {/* 皮肤切换 */}
-      <div className="userBlock">
-        <ThemeIcon
-          type="User"
-          width="0.1306rem"
-          height="0.1503rem"
-          changeTheme={changeTheme}
-          theme={theme}
-        />
-      </div>
-    </Space>
+    <div className={styles.rightContentWrap}>
+      <Row>
+        <Col span={8} />
+        <Col span={4}>
+          <HeaderSearch
+            className={`${styles.action} ${styles.search}`}
+            placeholder="在系统中搜索功能/单据"
+            // defaultValue="umi ui"
+            options={[
+              {
+                label: <a href="https://umijs.org/zh/guide/umi-ui.html">umi ui</a>,
+                value: 'umi ui',
+              },
+              {
+                label: <a href="next.ant.design">Ant Design</a>,
+                value: 'Ant Design',
+              },
+              {
+                label: <a href="https://protable.ant.design/">Pro Table</a>,
+                value: 'Pro Table',
+              },
+              {
+                label: <a href="https://prolayout.ant.design/">Pro Layout</a>,
+                value: 'Pro Layout',
+              },
+            ]}
+            // onSearch={value => {
+            //   console.log('input', value);
+            // }}
+          />
+        </Col>
+        <Col span={12}>
+          <Space className={className} size={'large'}>
+            <div className="weather">
+              <Weather
+                weather={{
+                  temperature: 18,
+                  address: '北京',
+                  description: '多云转晴',
+                  date: '2021年10月28日',
+                }}
+              />
+            </div>
+            <div className={styles.message}>
+              <Badge count={5}>
+                <img src={imgMessage} alt="加载失败..." />
+              </Badge>
+            </div>
+            <div className={styles.setting}>
+              <img src={imgSetting} alt="加载失败..." />
+            </div>
+            <AvatarSelf />
+          </Space>
+        </Col>
+      </Row>
+    </div>
   );
 };
 export default GlobalHeaderRight;

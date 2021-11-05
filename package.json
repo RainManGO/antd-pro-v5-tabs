@@ -51,6 +51,7 @@
     "@umijs/preset-react": "1.x",
     "@umijs/test": "^3.5.13",
     "commitizen": "^4.2.4",
+    "commitlint": "^14.1.0",
     "cross-env": "^7.0.3",
     "eslint": "^7.31.0",
     "lint-staged": "^11.0.1",

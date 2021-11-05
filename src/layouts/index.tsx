@@ -2,7 +2,7 @@
  * @Author: ZY
  * @Date: 2021-07-21 11:58:40
  * @LastEditors: ZLL
- * @LastEditTime: 2021-11-03 16:07:50
+ * @LastEditTime: 2021-11-05 15:40:25
  * @FilePath: \main\src\layouts\index.tsx
  * @Description: 布局入口文件
  */
@@ -21,6 +21,11 @@ import type { ProSettings, BasicLayoutProps as ProLayoutProps } from '@ant-desig
 import whiteTheme from '@/themes/whiteTheme.ts';
 import blackTheme from '@/themes/blackTheme.ts';
 import '@/themes/theme.less';
+import logoImg from '@/assets/logo.png';
+import logoFontImg from '@/assets/logoFont.png';
+import addPrepareImg from '@/assets/addPrepare.png';
+import bottomMenuNavImg from '@/assets/bottomMenuNav.png';
+import CustomNav from './components/CustomNav';
 
 //样式
 import './index.less';
@@ -35,6 +40,8 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
   const [settings, setSetting] = useState<Partial<ProSettings> | undefined>({ fixSiderbar: true });
   const [collapsed, setCollapsed] = useState(false);
   const [theme, setTheme] = useState(localStorage.getItem('selectedTheme') ?? 'black');
+  const [customNav, setCustomNav] = useState<boolean>(true);
+
   const refresh = () => {};
 
   getThemeStyle();
@@ -72,10 +79,12 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
         {...layoutDefaultSettings}
         collapsed={collapsed}
         menuHeaderRender={() => {
-          if (collapsed) {
-            return <div>中石油</div>;
-          }
-          return <div>哈哈哈</div>;
+          return (
+            <div className={`menu-logo ${collapsed ? 'closed' : 'open'}`}>
+              <img src={logoImg} alt="logo未加载" />
+              {!collapsed && <img src={logoFontImg} alt="logo未加载" />}
+            </div>
+          );
         }}
         headerContentRender={() => {
           return (
@@ -97,23 +106,41 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
         route={props.route}
         menuExtraRender={(menu) => {
           return (
-            !menu.collapsed && (
-              <div style={{ color: 'white', textAlign: 'center', background: 'blue' }}>
-                我要制单
+            <div className="custom">
+              <div className="zhidan">
+                <div className={menu.collapsed ? 'closed' : 'open'}>
+                  <img src={addPrepareImg} alt="加载失败..." />
+                  {!menu.collapsed && <p>我要制单</p>}
+                </div>
               </div>
-            )
+              <div className={`divider ${menu?.collapsed ? 'closed' : 'open'}`} />
+              <div className={`all-function ${menu?.collapsed ? 'closed' : 'open'}`}>
+                <div className={'position'}>
+                  <img src={bottomMenuNavImg} alt="加载失败..." />
+                  {!menu?.collapsed && '全部功能'}
+                </div>
+              </div>
+            </div>
           );
         }}
         menuFooterRender={(menu) => {
           return (
-            !menu?.collapsed && (
+            <div onClick={refresh} className={`bottomNav ${menu?.collapsed ? 'closed' : 'open'}`}>
               <div
-                onClick={refresh}
-                style={{ color: 'white', textAlign: 'center', background: 'blue' }}
+                className={'position'}
+                onClick={() => {
+                  setCustomNav(!customNav);
+                }}
               >
-                自定义菜单
+                <img src={bottomMenuNavImg} alt="加载失败..." />
+                {!menu?.collapsed && '自定义导航'}
               </div>
-            )
+              {customNav && (
+                <div className="custom-nav-wrap">
+                  <CustomNav data={1} />
+                </div>
+              )}
+            </div>
           );
         }}
         rightContentRender={() => <RightContent changeTheme={changeTheme} theme={theme} />}

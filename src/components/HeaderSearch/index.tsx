@@ -38,7 +38,7 @@ const HeaderSearch: React.FC<HeaderSearchProps> = (props) => {
     onChange: props.onChange,
   });
 
-  const [searchMode, setSearchMode] = useMergedState(defaultVisible ?? false, {
+  const [searchMode, setSearchMode] = useMergedState(defaultVisible ?? true, {
     value: props.visible,
     onChange: onVisibleChange,
   });
@@ -63,12 +63,6 @@ const HeaderSearch: React.FC<HeaderSearchProps> = (props) => {
         }
       }}
     >
-      <SearchOutlined
-        key="Icon"
-        style={{
-          cursor: 'pointer',
-        }}
-      />
       <AutoComplete
         key="AutoComplete"
         className={inputClass}
@@ -77,11 +71,13 @@ const HeaderSearch: React.FC<HeaderSearchProps> = (props) => {
         onChange={setValue}
       >
         <Input
-          size="small"
+          size="middle"
           ref={inputRef}
           defaultValue={defaultValue}
           aria-label={placeholder}
           placeholder={placeholder}
+          style={{ borderRadius: '16px' }}
+          prefix={<SearchOutlined />}
           onKeyDown={(e) => {
             if (e.key === 'Enter') {
               if (restProps.onSearch) {
@@ -90,7 +86,7 @@ const HeaderSearch: React.FC<HeaderSearchProps> = (props) => {
             }
           }}
           onBlur={() => {
-            setSearchMode(false);
+            // setSearchMode(false);
           }}
         />
       </AutoComplete>
