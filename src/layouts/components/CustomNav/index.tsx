@@ -1,265 +1,158 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './index.less';
 import { Checkbox, Button, Row, Col, Space } from 'antd';
 import returnImg from '@/assets/return.png';
 
+type customNavData = {
+  title: string;
+  items: string[];
+};
+type item = {
+  data: string;
+  checked: boolean;
+};
+
+type rightData = {
+  title: string;
+  items: item[];
+};
+
 const CustomNav: React.FC<{
-  data: any;
+  isClose: (flag: boolean) => void;
+  // confirm: (data: item[]) => void;
+  data: customNavData[];
 }> = (props) => {
-  const onChange = (e) => {
-    console.log(`checked = ${e.target.checked}`);
+  const [leftData, setLeftData] = useState<item[]>([]);
+  const [rightData, setRightData] = useState<rightData[]>([]);
+
+  const { isClose, data } = props;
+
+  // 处理数据格式,增加checkbox的受控参数checked
+  const formatter = () => {
+    const formatterData = data.map((item) => {
+      const dataArr = item.items.map((item1) => {
+        return {
+          data: item1,
+          checked: false,
+        };
+      });
+      return {
+        title: item.title,
+        items: dataArr,
+      };
+    });
+    setRightData(formatterData);
   };
-  console.log(props);
+
+  useEffect(() => {
+    formatter();
+  }, []);
+
+  const ctrolLeftData = (value: string, checked: boolean) => {
+    const leftDataEdit: item[] = [...leftData];
+    let newLeftData: item[] = [];
+    if (checked) {
+      leftDataEdit.push({ data: value, checked: true });
+      setLeftData(leftDataEdit);
+    } else {
+      newLeftData = leftDataEdit.filter((item) => value !== item.data);
+      setLeftData(newLeftData);
+    }
+  };
+
+  const ctrolRightData = (value: string, checked: boolean) => {
+    //超过允许值不可在增加
+    if (leftData.length > 4 && checked) {
+      return;
+    }
+    //处理受控checked
+    const newRight: any = [];
+    rightData.map((item) => {
+      const newItems = item.items.map((item1) => {
+        if (item1.data === value) {
+          ctrolLeftData(value, checked);
+          return { ...item1, checked: checked };
+        } else {
+          return item1;
+        }
+      });
+      newRight.push({ ...item, items: newItems });
+    });
+    setRightData(newRight);
+  };
+
+  const onChange = (e: any) => {
+    ctrolRightData(e.target.value, e.target.checked);
+  };
+
+  const leftPopEvent = (value: string, checked: boolean) => {
+    ctrolLeftData(value, checked);
+    ctrolRightData(value, false);
+  };
+
+  const leftDataArr = () => {
+    return leftData.map((item, index) => {
+      return (
+        <li key={index}>
+          <div className="item">
+            <div className="text">{item.data}</div>
+            <img
+              src={returnImg}
+              alt="图标加载失败"
+              onClick={() => {
+                leftPopEvent(item.data, false);
+              }}
+            />
+          </div>
+        </li>
+      );
+    });
+  };
+
+  const selectItems = () => {
+    return rightData.map((item1, i) => {
+      const selectItem = item1.items.map((item2, index) => {
+        return (
+          <dd key={item2.data + index}>
+            <Checkbox value={item2.data} checked={item2.checked} onChange={onChange}>
+              <div>{item2.data}</div>
+            </Checkbox>
+          </dd>
+        );
+      });
+      return (
+        <li key={i}>
+          <div className="title">{item1.title}</div>
+          <div className="items">
+            <dl>{selectItem}</dl>
+          </div>
+        </li>
+      );
+    });
+  };
 
   return (
     <div className="custom-nav-comp">
       <div className="header">
         <div className="title">自定义导航</div>
-        <img src={returnImg} alt="图标加载失败" />
+        <img
+          src={returnImg}
+          alt="图标加载失败"
+          onClick={() => {
+            isClose(false);
+          }}
+        />
       </div>
       <div className="content">
         <div className="left">
-          <ul>
-            <li>
-              <div className="item">
-                <div className="text">费用报销单</div>
-                <img src={returnImg} alt="图标加载失败" />
-              </div>
-            </li>
-            <li>
-              <div className="item">
-                <div className="text">费用报销单费用报销单费用报销单</div>
-                <img src={returnImg} alt="图标加载失败" />
-              </div>
-            </li>
-            <li>
-              <div className="item">
-                <div className="text">费用报销单</div>
-                <img src={returnImg} alt="图标加载失败" />
-              </div>
-            </li>
-            <li>
-              <div className="item">
-                <div className="text">费用报销单</div>
-                <img src={returnImg} alt="图标加载失败" />
-              </div>
-            </li>
-            <li>
-              <div className="item">
-                <div className="text">费用报销单</div>
-                <img src={returnImg} alt="图标加载失败" />
-              </div>
-            </li>
-            <li>
-              <div className="item">
-                <div className="text">费用报销单</div>
-                <img src={returnImg} alt="图标加载失败" />
-              </div>
-            </li>
-            <li>
-              <div className="item">
-                <div className="text">费用报销单</div>
-                <img src={returnImg} alt="图标加载失败" />
-              </div>
-            </li>
-          </ul>
+          <ul>{leftDataArr()}</ul>
           <div className="tip">
-            {8} <span>/15</span>
+            {leftData.length} <span>/5</span>
           </div>
         </div>
         <div className="right">
           <div className="position">
-            <ul>
-              <li>
-                <div className="title">采购报销</div>
-                <div className="items">
-                  <dl>
-                    <dd>
-                      <Checkbox value={898} onChange={onChange} />
-                      <div>费用费用报销单费用报销单报销单</div>
-                    </dd>
-                    <dd>
-                      <Checkbox value={889} onChange={onChange} />
-                      <div>费用费用报销单费用报销单报销单</div>
-                    </dd>
-                    <dd>
-                      <Checkbox value={33} onChange={onChange} />
-                      <div>费用费用报销单费用报销单报销单</div>
-                    </dd>
-                    <dd>
-                      <Checkbox value={22} onChange={onChange} />
-                      <div>费用费用报销单费用报销单报销单</div>
-                    </dd>
-                    <dd>
-                      <Checkbox value={'字符串'} onChange={onChange} />
-                      <div>费用费用报销单费用报销单报销单</div>
-                    </dd>
-                  </dl>
-                </div>
-              </li>
-              <li>
-                <div className="title">采购报销</div>
-                <div className="items">
-                  <dl>
-                    <dd>
-                      <Checkbox value={898} onChange={onChange} />
-                      <div>费用费用报销单费用报销单报销单</div>
-                    </dd>
-                    <dd>
-                      <Checkbox value={889} onChange={onChange} />
-                      <div>费用费用报销单费用报销单报销单</div>
-                    </dd>
-                    <dd>
-                      <Checkbox value={33} onChange={onChange} />
-                      <div>费用费用报销单费用报销单报销单</div>
-                    </dd>
-                    <dd>
-                      <Checkbox value={22} onChange={onChange} />
-                      <div>费用费用报销单费用报销单报销单</div>
-                    </dd>
-                    <dd>
-                      <Checkbox value={'字符串'} onChange={onChange} />
-                      <div>费用费用报销单费用报销单报销单</div>
-                    </dd>
-                  </dl>
-                </div>
-              </li>
-              <li>
-                <div className="title">采购报销</div>
-                <div className="items">
-                  <dl>
-                    <dd>
-                      <Checkbox value={898} onChange={onChange} />
-                      <div>费用费用报销单费用报销单报销单</div>
-                    </dd>
-                    <dd>
-                      <Checkbox value={889} onChange={onChange} />
-                      <div>费用费用报销单费用报销单报销单</div>
-                    </dd>
-                    <dd>
-                      <Checkbox value={33} onChange={onChange} />
-                      <div>费用费用报销单费用报销单报销单</div>
-                    </dd>
-                    <dd>
-                      <Checkbox value={22} onChange={onChange} />
-                      <div>费用费用报销单费用报销单报销单</div>
-                    </dd>
-                    <dd>
-                      <Checkbox value={'字符串'} onChange={onChange} />
-                      <div>费用费用报销单费用报销单报销单</div>
-                    </dd>
-                  </dl>
-                </div>
-              </li>
-              <li>
-                <div className="title">采购报销</div>
-                <div className="items">
-                  <dl>
-                    <dd>
-                      <Checkbox value={898} onChange={onChange} />
-                      <div>费用费用报销单费用报销单报销单</div>
-                    </dd>
-                    <dd>
-                      <Checkbox value={889} onChange={onChange} />
-                      <div>费用费用报销单费用报销单报销单</div>
-                    </dd>
-                    <dd>
-                      <Checkbox value={33} onChange={onChange} />
-                      <div>费用费用报销单费用报销单报销单</div>
-                    </dd>
-                    <dd>
-                      <Checkbox value={22} onChange={onChange} />
-                      <div>费用费用报销单费用报销单报销单</div>
-                    </dd>
-                    <dd>
-                      <Checkbox value={'字符串'} onChange={onChange} />
-                      <div>费用费用报销单费用报销单报销单</div>
-                    </dd>
-                  </dl>
-                </div>
-              </li>
-              <li>
-                <div className="title">采购报销</div>
-                <div className="items">
-                  <dl>
-                    <dd>
-                      <Checkbox value={898} onChange={onChange} />
-                      <div>费用费用报销单费用报销单报销单</div>
-                    </dd>
-                    <dd>
-                      <Checkbox value={889} onChange={onChange} />
-                      <div>费用费用报销单费用报销单报销单</div>
-                    </dd>
-                    <dd>
-                      <Checkbox value={33} onChange={onChange} />
-                      <div>费用费用报销单费用报销单报销单</div>
-                    </dd>
-                    <dd>
-                      <Checkbox value={22} onChange={onChange} />
-                      <div>费用费用报销单费用报销单报销单</div>
-                    </dd>
-                    <dd>
-                      <Checkbox value={'字符串'} onChange={onChange} />
-                      <div>费用费用报销单费用报销单报销单</div>
-                    </dd>
-                  </dl>
-                </div>
-              </li>
-              <li>
-                <div className="title">采购报销</div>
-                <div className="items">
-                  <dl>
-                    <dd>
-                      <Checkbox value={898} onChange={onChange} />
-                      <div>费用费用报销单费用报销单报销单</div>
-                    </dd>
-                    <dd>
-                      <Checkbox value={889} onChange={onChange} />
-                      <div>费用费用报销单费用报销单报销单</div>
-                    </dd>
-                    <dd>
-                      <Checkbox value={33} onChange={onChange} />
-                      <div>费用费用报销单费用报销单报销单</div>
-                    </dd>
-                    <dd>
-                      <Checkbox value={22} onChange={onChange} />
-                      <div>费用费用报销单费用报销单报销单</div>
-                    </dd>
-                    <dd>
-                      <Checkbox value={'字符串'} onChange={onChange} />
-                      <div>费用费用报销单费用报销单报销单</div>
-                    </dd>
-                  </dl>
-                </div>
-              </li>
-              <li>
-                <div className="title">采购报销</div>
-                <div className="items">
-                  <dl>
-                    <dd>
-                      <Checkbox value={898} onChange={onChange} />
-                      <div>费用费用报销单费用报销单报销单</div>
-                    </dd>
-                    <dd>
-                      <Checkbox value={889} onChange={onChange} />
-                      <div>费用费用报销单费用报销单报销单</div>
-                    </dd>
-                    <dd>
-                      <Checkbox value={33} onChange={onChange} />
-                      <div>费用费用报销单费用报销单报销单</div>
-                    </dd>
-                    <dd>
-                      <Checkbox value={22} onChange={onChange} />
-                      <div>费用费用报销单费用报销单报销单</div>
-                    </dd>
-                    <dd>
-                      <Checkbox value={'字符串'} onChange={onChange} />
-                      <div>费用费用报销单费用报销单报销单</div>
-                    </dd>
-                  </dl>
-                </div>
-              </li>
-            </ul>
+            <ul>{selectItems()}</ul>
           </div>
         </div>
       </div>
@@ -270,7 +163,14 @@ const CustomNav: React.FC<{
               <Button type="primary">确定</Button>
             </Col>
             <Col>
-              <Button type="primary">取消</Button>
+              <Button
+                type="primary"
+                onClick={() => {
+                  isClose(false);
+                }}
+              >
+                取消
+              </Button>
             </Col>
           </Space>
         </Row>
