@@ -1,16 +1,26 @@
+/*
+ * @Author: ZLL
+ * @Date: 2021-11-05 15:39:41
+ * @LastEditors: ZLL
+ * @LastEditTime: 2021-11-05 15:42:09
+ * @FilePath: \main\src\components\RightContent\index.tsx
+ * @Description: 文件描述
+ */
 import { Space, Row, Col, Badge } from 'antd';
 import React from 'react';
 import { useModel } from 'umi';
 import AvatarSelf from './AvatarDropdown';
 import HeaderSearch from '../HeaderSearch';
 import styles from './index.less';
+// import ThemeIcon from '../theme-icon';
 import imgMessage from '@/assets/message.png';
 import imgSetting from '@/assets/setting.png';
 import Weather from './Weather';
 
 export type SiderTheme = 'light' | 'dark';
 
-const GlobalHeaderRight: React.FC = () => {
+const GlobalHeaderRight: React.FC<{ changeTheme: any; theme: string }> = () => {
+  // const { changeTheme, theme } = props;
   const { initialState } = useModel('@@initialState');
 
   if (!initialState || !initialState.settings) {

@@ -1,11 +1,12 @@
 /*
  * @Author: ZY
  * @Date: 2021-07-21 11:58:40
- * @LastEditors: ZY
- * @LastEditTime: 2021-11-02 09:04:59
- * @FilePath: /main/src/layouts/index.tsx
+ * @LastEditors: ZLL
+ * @LastEditTime: 2021-11-05 15:40:25
+ * @FilePath: \main\src\layouts\index.tsx
  * @Description: 布局入口文件
  */
+// @ts-nocheck
 import { useState } from 'react';
 import { connect } from 'umi';
 import { Link } from 'react-router-dom';
@@ -16,24 +17,34 @@ import ProLayout, { SettingDrawer } from '@ant-design/pro-layout';
 import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
 import layoutDefaultSettings from '../../config/layoutDefaultSettings';
 import type { ProSettings, BasicLayoutProps as ProLayoutProps } from '@ant-design/pro-layout';
-import './index.less';
+//主题
+import whiteTheme from '@/themes/whiteTheme.ts';
+import blackTheme from '@/themes/blackTheme.ts';
+import '@/themes/theme.less';
 import logoImg from '@/assets/logo.png';
 import logoFontImg from '@/assets/logoFont.png';
 import addPrepareImg from '@/assets/addPrepare.png';
 import bottomMenuNavImg from '@/assets/bottomMenuNav.png';
 import CustomNav from './components/CustomNav';
 
+//样式
+import './index.less';
 interface LayoutsType extends ProLayoutProps {
   tagsModel: Tag[];
   loading: boolean;
 }
 
 const IndexPage: ConnectRC<LayoutsType> = (props) => {
+  console.log('props', props);
+
   const [settings, setSetting] = useState<Partial<ProSettings> | undefined>({ fixSiderbar: true });
   const [collapsed, setCollapsed] = useState(false);
+  const [theme, setTheme] = useState(localStorage.getItem('selectedTheme') ?? 'black');
   const [customNav, setCustomNav] = useState<boolean>(true);
 
   const refresh = () => {};
+
+  getThemeStyle();
 
   /**
    * @description: 获取选中的key
@@ -91,6 +102,18 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
     },
   ];
 
+  function getThemeStyle() {
+    const themeStyle1 = theme == 'black' ? blackTheme : whiteTheme;
+    themeStyle1.forEach((item: any) => {
+      document.body.style.setProperty(item.property, item.value);
+    });
+  }
+
+  function changeTheme(themes: any) {
+    console.log('themes', themes);
+    setTheme(themes);
+    getThemeStyle();
+  }
   return (
     <div
       id="test-pro-layout"
@@ -167,7 +190,7 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
             </div>
           );
         }}
-        rightContentRender={() => <RightContent />}
+        rightContentRender={() => <RightContent changeTheme={changeTheme} theme={theme} />}
       >
         <div id="myWrapperLoading">
           <TabsView
@@ -175,7 +198,7 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
             tags={props.tagsModel}
             route={props.route}
             dispatch={props.dispatch}
-          ></TabsView>
+          />
         </div>
       </ProLayout>
       <SettingDrawer
