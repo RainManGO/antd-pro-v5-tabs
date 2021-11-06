@@ -18,7 +18,7 @@ type rightData = {
 };
 
 const CustomNav: React.FC<{
-  isClose: (flag: boolean) => void;
+  isClose: () => void;
   // confirm: (data: item[]) => void;
   data: customNavData[];
 }> = (props) => {
@@ -139,7 +139,7 @@ const CustomNav: React.FC<{
           src={returnImg}
           alt="图标加载失败"
           onClick={() => {
-            isClose(false);
+            isClose();
           }}
         />
       </div>
@@ -166,7 +166,7 @@ const CustomNav: React.FC<{
               <Button
                 type="primary"
                 onClick={() => {
-                  isClose(false);
+                  isClose();
                 }}
               >
                 取消

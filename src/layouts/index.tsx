@@ -21,11 +21,14 @@ import type { ProSettings, BasicLayoutProps as ProLayoutProps } from '@ant-desig
 import whiteTheme from '@/themes/whiteTheme.ts';
 import blackTheme from '@/themes/blackTheme.ts';
 import '@/themes/theme.less';
+//导入图标
 import logoImg from '@/assets/logo.png';
 import logoFontImg from '@/assets/logoFont.png';
 import addPrepareImg from '@/assets/addPrepare.png';
 import bottomMenuNavImg from '@/assets/bottomMenuNav.png';
+//导入组件
 import CustomNav from './components/CustomNav';
+import AllFunction from './components/AllFunction';
 
 //样式
 import './index.less';
@@ -40,7 +43,10 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
   const [settings, setSetting] = useState<Partial<ProSettings> | undefined>({ fixSiderbar: true });
   const [collapsed, setCollapsed] = useState(false);
   const [theme, setTheme] = useState(localStorage.getItem('selectedTheme') ?? 'black');
-  const [customNav, setCustomNav] = useState<boolean>(true);
+  const [open, setOpen] = useState({
+    AllFunction: true,
+    CustomNav: false,
+  });
 
   const refresh = () => {};
 
@@ -53,10 +59,6 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
    */
   const getActiveKey = (tags: Tag[]) => {
     return tags.filter((t) => t.active)[0].key;
-  };
-
-  const changeCustomNav = (flag: boolean) => {
-    setCustomNav(flag);
   };
 
   const customNavData = [
@@ -162,10 +164,19 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
               </div>
               <div className={`divider ${menu?.collapsed ? 'closed' : 'open'}`} />
               <div className={`all-function ${menu?.collapsed ? 'closed' : 'open'}`}>
-                <div className={'position'}>
+                <div
+                  className={'position'}
+                  onClick={() => {
+                    setOpen({
+                      CustomNav: false,
+                      AllFunction: !open.AllFunction,
+                    });
+                  }}
+                >
                   <img src={bottomMenuNavImg} alt="加载失败..." />
                   {!menu?.collapsed && '全部功能'}
                 </div>
+                <div className="allfunction">{open.AllFunction && <AllFunction />}</div>
               </div>
             </div>
           );
@@ -176,15 +187,26 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
               <div
                 className={'position'}
                 onClick={() => {
-                  changeCustomNav(true);
+                  setOpen({
+                    CustomNav: true,
+                    AllFunction: false,
+                  });
                 }}
               >
                 <img src={bottomMenuNavImg} alt="加载失败..." />
                 {!menu?.collapsed && '自定义导航'}
               </div>
-              {customNav && (
+              {open.CustomNav && (
                 <div className="custom-nav-wrap">
-                  <CustomNav isClose={changeCustomNav} data={customNavData} />
+                  <CustomNav
+                    isClose={() => {
+                      setOpen({
+                        CustomNav: false,
+                        AllFunction: false,
+                      });
+                    }}
+                    data={customNavData}
+                  />
                 </div>
               )}
             </div>
