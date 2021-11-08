@@ -62,48 +62,34 @@
 }
 
 .rightContentWrap {
-  width: 100%;
-  .message {
-    position: relative;
-    top: 2px;
-    cursor: pointer;
-    img {
-      width: 20px;
-    }
-  }
-  .setting {
-    margin-right: -10px;
-    cursor: pointer;
-    img {
-      position: relative;
-      top: -1px;
-      width: 25px;
-    }
-  }
-}
-
-.weatherWrap {
   display: flex;
-  align-items: center;
-  h2 {
-    padding-top: 22px;
-    span {
-      position: relative;
-      top: -5px;
-      left: -5px;
-    }
+  width: 100%;
+  .left {
+    flex: 1 1 auto;
+    width: 800px;
+    text-align: center;
   }
-  .rightWrap {
-    width: 130px;
-    height: 40px;
-    .top {
-      height: 14px;
-      margin-top: -12px;
-      margin-bottom: 5px;
-      font-size: 11px;
+  .right {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: space-around;
+    width: 370px;
+    .message {
+      position: relative;
+      top: 2px;
+      cursor: pointer;
       img {
-        width: 14px;
-        height: 14px;
+        width: 20px;
+      }
+    }
+    .setting {
+      margin-right: -10px;
+      cursor: pointer;
+      img {
+        position: relative;
+        top: -1px;
+        width: 25px;
       }
     }
   }
