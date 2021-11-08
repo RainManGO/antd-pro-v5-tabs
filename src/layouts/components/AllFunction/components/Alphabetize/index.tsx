@@ -2,120 +2,38 @@ import React from 'react';
 
 import './index.less';
 
+type dataType = {
+  class: string;
+  value: string[];
+};
 const Alphabetize: React.FC<{
-  data: any;
+  data: dataType[];
 }> = (props) => {
-  const data = [
-    {
-      class: 'A',
-      value: [
-        '功能名称功能功能名1',
-        '功能名称功能功能名2',
-        '功能名称功能功能名3',
-        '功能名称功能功能名4',
-        '功能名称功能功能名5',
-        '功能名称功能功能名6',
-        '功能名称功能功能名7',
-        '功能名称功能功能名8',
-        '功能名称功能功能名9',
-        '功能名称功能功能名10',
-      ],
-    },
-    {
-      class: 'B',
-      value: [
-        '功能名称功能功能名1',
-        '功能名称功能功能名2',
-        '功能名称功能功能名3',
-        '功能名称功能功能名4',
-        '功能名称功能功能名5',
-        '功能名称功能功能名6',
-        '功能名称功能功能名7',
-        '功能名称功能功能名8',
-        '功能名称功能功能名9',
-        '功能名称功能功能名10',
-      ],
-    },
-    {
-      class: 'C',
-      value: [
-        '功能名称功能功能名1',
-        '功能名称功能功能名2',
-        '功能名称功能功能名3',
-        '功能名称功能功能名4',
-        '功能名称功能功能名5',
-        '功能名称功能功能名6',
-        '功能名称功能功能名7',
-        '功能名称功能功能名8',
-        '功能名称功能功能名9',
-        '功能名称功能功能名10',
-      ],
-    },
-    {
-      class: 'D',
-      value: [
-        '功能名称功能功能名1',
-        '功能名称功能功能名2',
-        '功能名称功能功能名3',
-        '功能名称功能功能名4',
-        '功能名称功能功能名5',
-        '功能名称功能功能名6',
-        '功能名称功能功能名7',
-        '功能名称功能功能名8',
-        '功能名称功能功能名9',
-        '功能名称功能功能名10',
-      ],
-    },
-    {
-      class: 'E',
-      value: [
-        '功能名称功能功能名1',
-        '功能名称功能功能名2',
-        '功能名称功能功能名3',
-        '功能名称功能功能名4',
-        '功能名称功能功能名5',
-        '功能名称功能功能名6',
-        '功能名称功能功能名7',
-        '功能名称功能功能名8',
-        '功能名称功能功能名9',
-        '功能名称功能功能名10',
-      ],
-    },
-    {
-      class: 'F',
-      value: [
-        '功能名称功能功能名1',
-        '功能名称功能功能名2',
-        '功能名称功能功能名3',
-        '功能名称功能功能名4',
-        '功能名称功能功能名5',
-        '功能名称功能功能名6',
-        '功能名称功能功能名7',
-        '功能名称功能功能名8',
-        '功能名称功能功能名9',
-        '功能名称功能功能名10',
-      ],
-    },
-    {
-      class: 'G',
-      value: [
-        '功能名称功能功能名1',
-        '功能名称功能功能名2',
-        '功能名称功能功能名3',
-        '功能名称功能功能名4',
-        '功能名称功能功能名5',
-        '功能名称功能功能名6',
-        '功能名称功能功能名7',
-        '功能名称功能功能名8',
-        '功能名称功能功能名9',
-        '功能名称功能功能名10',
-      ],
-    },
-  ];
+  const { data } = props;
 
-  console.log(props, data);
+  const navRightArr: JSX.Element[] = [];
 
-  return <div className="alphabetize-wrap">mmgmg</div>;
+  const items = data.map((item, index) => {
+    navRightArr.push(<li>{item.class}</li>);
+    const childrenArr = item.value.map((children, i) => {
+      return <dd key={`${children + i}`}>{children}</dd>;
+    });
+    return (
+      <div className="content-item" key={index}>
+        <div className="title">{item.class}</div>
+        <dl>{childrenArr}</dl>
+      </div>
+    );
+  });
+
+  return (
+    <div className="alphabetize-wrap">
+      <div className="content-wrap">{items}</div>
+      <div className="nav-right">
+        <ul>{navRightArr}</ul>
+      </div>
+    </div>
+  );
 };
 
 export default Alphabetize;
