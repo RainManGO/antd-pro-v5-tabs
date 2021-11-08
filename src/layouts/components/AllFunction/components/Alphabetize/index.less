@@ -1,44 +1,45 @@
 .alphabetize-wrap {
-  position: relative;
   width: 100%;
   height: 658px;
   overflow-y: scroll;
-  .content-wrap {
-    width: 100%;
-    .title-alphabet {
+  .relative {
+    .content-wrap {
       width: 100%;
-      height: 20px;
-      padding-left: 25px;
-      color: white;
-      font-weight: bold;
-      line-height: 20px;
-      background: #27384e;
-    }
-    dl {
-      width: 100%;
-      margin: 0;
-      padding-top: 16px;
-      padding-bottom: 26px;
-      padding-left: 25px;
-      overflow: hidden;
-      background: #122239;
-      dd {
-        float: left;
-        width: 142px;
+      .title-alphabet {
+        width: 100%;
         height: 20px;
-        margin: 0;
-        margin-right: 44px;
-        margin-bottom: 12px;
-        color: #fff;
-        font-size: 14px;
+        padding-left: 25px;
+        color: white;
+        font-weight: bold;
         line-height: 20px;
-        opacity: 0.65;
+        background: #27384e;
+      }
+      dl {
+        width: 100%;
+        margin: 0;
+        padding-top: 16px;
+        padding-bottom: 26px;
+        padding-left: 25px;
+        overflow: hidden;
+        background: #122239;
+        dd {
+          float: left;
+          width: 142px;
+          height: 20px;
+          margin: 0;
+          margin-right: 44px;
+          margin-bottom: 12px;
+          color: #fff;
+          font-size: 14px;
+          line-height: 20px;
+          opacity: 0.65;
+        }
       }
     }
   }
   .nav-right {
-    position: absolute;
-    top: 0;
+    position: absolute; //以更上一级绝对定位
+    top: 100px;
     right: 0;
     ul {
       list-style: none;
