@@ -176,7 +176,11 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
                   <img src={bottomMenuNavImg} alt="加载失败..." />
                   {!menu?.collapsed && '全部功能'}
                 </div>
-                <div className="allfunction">{open.AllFunction && <AllFunction />}</div>
+                {open.AllFunction && (
+                  <div className={`allfunction-nav ${menu?.collapsed ? 'closed' : 'open'}`}>
+                    <AllFunction />
+                  </div>
+                )}
               </div>
             </div>
           );
