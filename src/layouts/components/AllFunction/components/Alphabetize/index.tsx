@@ -14,13 +14,19 @@ const Alphabetize: React.FC<{
   const navRightArr: JSX.Element[] = [];
 
   const items = data.map((item, index) => {
-    navRightArr.push(<li>{item.class}</li>);
+    navRightArr.push(
+      <li>
+        <a href={`#${item.class}`}>{item.class}</a>
+      </li>,
+    );
     const childrenArr = item.value.map((children, i) => {
       return <dd key={`${children + i}`}>{children}</dd>;
     });
     return (
       <div className="content-item" key={index}>
-        <div className="title-alphabet">{item.class}</div>
+        <div className="title-alphabet" id={item.class}>
+          {item.class}
+        </div>
         <dl>{childrenArr}</dl>
       </div>
     );
@@ -28,7 +34,9 @@ const Alphabetize: React.FC<{
 
   return (
     <div className="alphabetize-wrap">
-      <div className="content-wrap">{items}</div>
+      <div className="relative">
+        <div className="content-wrap">{items}</div>
+      </div>
       <div className="nav-right">
         <ul>{navRightArr}</ul>
       </div>
