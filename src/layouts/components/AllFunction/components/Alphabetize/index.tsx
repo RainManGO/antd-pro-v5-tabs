@@ -23,7 +23,7 @@ const Alphabetize: React.FC<{
       return <dd key={`${children + i}`}>{children}</dd>;
     });
     return (
-      <div className="content-item" key={index}>
+      <div className="content-item" key={index.toString()}>
         <div className="title-alphabet" id={item.class}>
           {item.class}
         </div>

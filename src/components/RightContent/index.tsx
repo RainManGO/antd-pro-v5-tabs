@@ -54,7 +54,7 @@ const GlobalHeaderRight: React.FC<{ changeTheme: any; theme: string }> = () => {
         />
       </div>
       <div className={styles.right}>
-        <div className="weather">
+        <div className={styles.weather}>
           <Weather
             weather={{
               temperature: 18,
