@@ -58,7 +58,7 @@ const Waterfall: React.FC<{
 
   useEffect(() => {
     setPositon();
-  });
+  }, []);
 
   return (
     <div id="waterfall-wrap" className="waterfall-wrap">

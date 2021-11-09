@@ -46,7 +46,7 @@ const CustomNav: React.FC<{
 
   useEffect(() => {
     formatter();
-  });
+  }, []);
 
   const ctrolLeftData = (value: string, checked: boolean) => {
     const leftDataEdit: item[] = [...leftData];
