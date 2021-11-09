@@ -94,3 +94,29 @@
     }
   }
 }
+
+@media screen and (max-width: 1000px) {
+  .rightContentWrap {
+    display: flex;
+    width: 100%;
+    .left {
+      display: none;
+    }
+  }
+}
+@media screen and (max-width: 800px) {
+  .rightContentWrap {
+    display: flex;
+    width: 100%;
+    .right {
+      display: flex;
+      flex: 0 0 auto;
+      align-items: center;
+      justify-content: space-around;
+      width: 230px;
+      .weather {
+        display: none;
+      }
+    }
+  }
+}
