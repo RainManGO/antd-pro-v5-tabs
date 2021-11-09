@@ -44,7 +44,7 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
   const [collapsed, setCollapsed] = useState(false);
   const [theme, setTheme] = useState(localStorage.getItem('selectedTheme') ?? 'black');
   const [open, setOpen] = useState({
-    AllFunction: true,
+    AllFunction: false,
     CustomNav: false,
   });
 
