@@ -46,7 +46,7 @@ const CustomNav: React.FC<{
 
   useEffect(() => {
     formatter();
-  }, []);
+  });
 
   const ctrolLeftData = (value: string, checked: boolean) => {
     const leftDataEdit: item[] = [...leftData];
@@ -93,7 +93,7 @@ const CustomNav: React.FC<{
   const leftDataArr = () => {
     return leftData.map((item, index) => {
       return (
-        <li key={index}>
+        <li key={index.toString()}>
           <div className="item">
             <div className="text">{item.data}</div>
             <img
@@ -113,7 +113,7 @@ const CustomNav: React.FC<{
     return rightData.map((item1, i) => {
       const selectItem = item1.items.map((item2, index) => {
         return (
-          <dd key={item2.data + index}>
+          <dd key={(item2.data + index).toString()}>
             <Checkbox value={item2.data} checked={item2.checked} onChange={onChange}>
               <div>{item2.data}</div>
             </Checkbox>
@@ -121,7 +121,7 @@ const CustomNav: React.FC<{
         );
       });
       return (
-        <li key={i}>
+        <li key={i.toString()}>
           <div className="title">{item1.title}</div>
           <div className="items">
             <dl>{selectItem}</dl>

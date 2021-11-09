@@ -4,6 +4,7 @@ import './index.less';
 
 type dataType = {
   class: string;
+  title: string;
   value: string[];
 };
 const Alphabetize: React.FC<{
