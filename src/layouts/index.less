@@ -36,7 +36,7 @@
     margin: 0;
     line-height: 57px;
     cursor: pointer;
-    .open {
+    .position.open {
       display: flex;
       height: 57px;
       img {
@@ -57,13 +57,26 @@
         }
       }
     }
-    .closed {
+    .position.closed {
       width: 100%;
       text-align: center;
       img {
         width: 14px;
         height: 14px;
         margin-left: -3px;
+      }
+    }
+    .makelist-nav {
+      position: fixed;
+      top: 96px;
+      width: 228px;
+      height: 764px;
+      background: #122239;
+      &.open {
+        left: 228px;
+      }
+      &.closed {
+        left: 48px;
       }
     }
   }
