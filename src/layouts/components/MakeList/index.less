@@ -47,14 +47,12 @@
       }
     }
     .one-nav-dl {
-      width: 187px;
-      margin: 0 auto;
       border-top: 1px solid #3b4c64;
       dd {
         display: flex;
         justify-content: space-between;
         height: 40px;
-        margin: 0 -20px;
+        margin-right: -1px;
         padding: 0 20px;
         line-height: 40px;
         .two-nav {
@@ -65,8 +63,10 @@
           width: 199px;
           height: 100%;
           background: #122239;
+          &:hover {
+            display: block;
+          }
           dl {
-            margin-left: -20px;
             dt {
               width: 140px;
               margin: 0 auto;
@@ -88,6 +88,7 @@
           }
         }
         &:hover {
+          background: #1e3453;
           .two-nav {
             position: absolute;
             top: 0;
@@ -97,7 +98,6 @@
             height: 100%;
             background: #122239;
             dl {
-              margin-left: -20px;
               dt {
                 width: 140px;
                 margin: 0 auto;
@@ -106,6 +106,7 @@
                 font-size: 16px;
               }
               dd {
+                width: 100%;
                 height: 40px;
                 line-height: 40px;
                 p {
@@ -114,6 +115,10 @@
                   overflow: hidden;
                   white-space: nowrap;
                   text-overflow: ellipsis;
+                }
+                &:hover {
+                  background: #3177d6;
+                  background-size: 80px 60px;
                 }
               }
             }
