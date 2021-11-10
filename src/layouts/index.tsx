@@ -29,6 +29,7 @@ import bottomMenuNavImg from '@/assets/bottomMenuNav.png';
 //导入组件
 import CustomNav from './components/CustomNav';
 import AllFunction from './components/AllFunction';
+import MakeList from './components/MakeList';
 
 //样式
 import './index.less';
@@ -46,6 +47,7 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
   const [open, setOpen] = useState({
     AllFunction: false,
     CustomNav: false,
+    MakeList: true,
   });
 
   const refresh = () => {};
@@ -157,10 +159,24 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
           return (
             <div className="custom">
               <div className="zhidan">
-                <div className={menu.collapsed ? 'closed' : 'open'}>
+                <div
+                  className={`position ${menu.collapsed ? 'closed' : 'open'}`}
+                  onClick={() => {
+                    setOpen({
+                      MakeList: !open.MakeList,
+                      CustomNav: false,
+                      AllFunction: false,
+                    });
+                  }}
+                >
                   <img src={addPrepareImg} alt="加载失败..." />
                   {!menu.collapsed && <p>我要制单</p>}
                 </div>
+                {open.MakeList && (
+                  <div className={`makelist-nav ${menu?.collapsed ? 'closed' : 'open'}`}>
+                    <MakeList data={111} />
+                  </div>
+                )}
               </div>
               <div className={`divider ${menu?.collapsed ? 'closed' : 'open'}`} />
               <div className={`all-function ${menu?.collapsed ? 'closed' : 'open'}`}>
@@ -168,6 +184,7 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
                   className={'position'}
                   onClick={() => {
                     setOpen({
+                      MakeList: false,
                       CustomNav: false,
                       AllFunction: !open.AllFunction,
                     });
@@ -192,6 +209,7 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
                 className={'position'}
                 onClick={() => {
                   setOpen({
+                    MakeList: false,
                     CustomNav: true,
                     AllFunction: false,
                   });
@@ -205,6 +223,7 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
                   <CustomNav
                     isClose={() => {
                       setOpen({
+                        MakeList: false,
                         CustomNav: false,
                         AllFunction: false,
                       });
