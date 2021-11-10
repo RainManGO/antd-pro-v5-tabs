@@ -158,17 +158,17 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
         menuExtraRender={(menu) => {
           return (
             <div className="custom">
-              <div
-                className="zhidan"
-                onClick={() => {
-                  setOpen({
-                    MakeList: !open.MakeList,
-                    CustomNav: false,
-                    AllFunction: false,
-                  });
-                }}
-              >
-                <div className={`position ${menu.collapsed ? 'closed' : 'open'}`}>
+              <div className="zhidan">
+                <div
+                  className={`position ${menu.collapsed ? 'closed' : 'open'}`}
+                  onClick={() => {
+                    setOpen({
+                      MakeList: !open.MakeList,
+                      CustomNav: false,
+                      AllFunction: false,
+                    });
+                  }}
+                >
                   <img src={addPrepareImg} alt="加载失败..." />
                   {!menu.collapsed && <p>我要制单</p>}
                 </div>
