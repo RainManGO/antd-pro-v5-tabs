@@ -9,7 +9,7 @@ import Waterfall from './components/Waterfall';
 const AllFunction: React.FC<{
   data: any;
 }> = (props) => {
-  const [way, setWay] = useState('Waterfall');
+  const [way, setWay] = useState('Alphabetize');
   console.log(props);
 
   const data = [

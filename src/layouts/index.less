@@ -68,13 +68,20 @@
     }
     .makelist-nav {
       position: fixed;
-      top: 96px;
+      top: 46px;
+      display: none;
       width: 427px;
+      border-top: 50px solid transparent;
       &.open {
         left: 228px;
       }
       &.closed {
         left: 48px;
+      }
+    }
+    &:hover {
+      .makelist-nav {
+        display: block;
       }
     }
   }
@@ -131,6 +138,7 @@
     .allfunction-nav {
       position: fixed;
       top: 96px;
+      display: none;
       width: 1025px;
       height: 764px;
       background: #27384e;
@@ -139,6 +147,11 @@
       }
       &.closed {
         left: 48px;
+      }
+    }
+    &:hover {
+      .allfunction-nav {
+        display: block;
       }
     }
   }

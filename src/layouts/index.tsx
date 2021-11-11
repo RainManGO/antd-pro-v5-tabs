@@ -118,6 +118,7 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
     setTheme(themes);
     getThemeStyle();
   }
+
   return (
     <div
       id="test-pro-layout"
@@ -172,7 +173,7 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
                   <img src={addPrepareImg} alt="加载失败..." />
                   {!menu.collapsed && <p>我要制单</p>}
                 </div>
-                {open.MakeList && (
+                {true && (
                   <div className={`makelist-nav ${menu?.collapsed ? 'closed' : 'open'}`}>
                     <MakeList data={111} />
                   </div>
@@ -193,11 +194,12 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
                   <img src={bottomMenuNavImg} alt="加载失败..." />
                   {!menu?.collapsed && '全部功能'}
                 </div>
-                {open.AllFunction && (
-                  <div className={`allfunction-nav ${menu?.collapsed ? 'closed' : 'open'}`}>
-                    <AllFunction />
-                  </div>
-                )}
+                {open.AllFunction ||
+                  (true && (
+                    <div className={`allfunction-nav ${menu?.collapsed ? 'closed' : 'open'}`}>
+                      <AllFunction />
+                    </div>
+                  ))}
               </div>
             </div>
           );
