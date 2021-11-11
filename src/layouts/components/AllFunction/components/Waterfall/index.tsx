@@ -27,7 +27,7 @@ const Waterfall: React.FC<{
 
   // 获取最小值
   function getMin(arr: any[] = []) {
-    let min = arr[0]; // 假设数组的第一项就是我们要找的最小值
+    let min = arr[0]; // 假设数组的第一项为最小值
     for (let i = 1; i < arr.length; i++) {
       if (arr[i] < min) {
         min = arr[i];
