@@ -148,11 +148,9 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
                   <img src={addPrepareImg} alt="加载失败..." />
                   {!menu.collapsed && <p>我要制单</p>}
                 </div>
-                {true && (
-                  <div className={`makelist-nav ${menu?.collapsed ? 'closed' : 'open'}`}>
-                    <MakeList data={111} />
-                  </div>
-                )}
+                <div className={`makelist-nav ${menu?.collapsed ? 'closed' : 'open'}`}>
+                  <MakeList data={111} />
+                </div>
               </div>
               <div className={`divider ${menu?.collapsed ? 'closed' : 'open'}`} />
               <div className={`all-function ${menu?.collapsed ? 'closed' : 'open'}`}>
@@ -169,12 +167,9 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
                   <img src={bottomMenuNavImg} alt="加载失败..." />
                   {!menu?.collapsed && '全部功能'}
                 </div>
-                {open.AllFunction ||
-                  (true && (
-                    <div className={`allfunction-nav ${menu?.collapsed ? 'closed' : 'open'}`}>
-                      <AllFunction />
-                    </div>
-                  ))}
+                <div className={`allfunction-nav ${menu?.collapsed ? 'closed' : 'open'}`}>
+                  <AllFunction data={111} />
+                </div>
               </div>
             </div>
           );
