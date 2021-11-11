@@ -4,6 +4,7 @@
   height: 100%;
   overflow-y: scroll;
   background: #122239;
+
   div,
   h2,
   dl,
@@ -12,10 +13,12 @@
     padding: 0;
     border: 0;
   }
+
   .item {
     position: absolute;
     width: 160px;
     transition: all 0.3s;
+
     &:nth-child(n + 6) {
       border-top: 1px solid #3b4c64;
     }
@@ -30,6 +33,7 @@
       font-size: 14px;
       line-height: 36px;
     }
+
     dl {
       width: 100%;
       text-align: center;
@@ -39,7 +43,7 @@
         height: 20px;
         margin-bottom: 18px;
         overflow: hidden;
-        color: rgba(255, 255, 255, 0.65);
+        color: rgb(255 255 255 / 65%);
         line-height: 20px;
         white-space: nowrap;
         text-overflow: ellipsis;

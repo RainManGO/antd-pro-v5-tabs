@@ -1,6 +1,7 @@
 .tabsBox {
   display: flex;
   flex-direction: row;
+
   .tabsLeftButton,
   .tabsRightButton,
   .dropDownArrow {
@@ -13,41 +14,51 @@
     background-position: center;
     cursor: pointer;
   }
+
   .tabsRightButton {
     background-image: url('../../../public/tabsRight.png');
   }
+
   .dropDownArrow {
     background-image: url('../../../public/dropDownArrow.png');
   }
+
   :global {
     .ant-tabs-nav-more {
       display: none !important;
     }
+
     .ant-tabs {
       width: 100%;
     }
+
     .ant-tabs-nav {
       height: 40px;
       padding-top: 3px;
       background: #fff;
     }
+
     .ant-tabs-card.ant-tabs-top > .ant-tabs-nav .ant-tabs-tab + .ant-tabs-tab {
       margin-left: 0 !important;
     }
+
     .ant-tabs-card > .ant-tabs-nav .ant-tabs-tab {
       background: #fff;
       border: 0;
     }
+
     .ant-tabs-tab-active {
       background: #edf0f5 !important;
       border-radius: 8px 8px 0 0 !important;
     }
+
     .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
       // color: #000 !important;
       font-size: 14px;
       // font-weight: 500;
-      opacity: 0.85;
+      opacity: 85%;
     }
+
     .ant-tabs-tab-btn {
       max-width: 100px;
       overflow: hidden;

@@ -1,4 +1,5 @@
 {
+  "name": "main",
   "private": true,
   "scripts": {
     "start": "umi dev",
@@ -14,7 +15,7 @@
     "lint:fix": "eslint --fix --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src && npm run lint:style",
     "lint:js": "eslint --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src",
     "lint:prettier": "prettier -c --write \"src/**/*\" --end-of-line auto",
-    "lint:style": "stylelint --fix \"src/**/*.less\" --syntax less",
+    "lint:style": "stylelint --fix \"src/**/*.less\" --customSyntax postcss-less",
     "precommit": "lint-staged"
   },
   "gitHooks": {
@@ -22,7 +23,6 @@
     "commit-msg": "commitlint -E GIT_PARAMS"
   },
   "lint-staged": {
-    "**/*.less": "stylelint --syntax less",
     "**/*.{js,jsx,ts,tsx}": "npm run lint-staged:js",
     "**/*.{js,jsx,tsx,ts,less,md,json}": [
       "prettier --write"
@@ -42,22 +42,34 @@
     "umi": "^3.5.13"
   },
   "devDependencies": {
+    "@commitlint/config-conventional": "^14.1.0",
     "@types/lodash": "^4.14.176",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@types/react-loadable": "^5.5.6",
-    "@umijs/fabric": "^2.6.2",
+    "@typescript-eslint/eslint-plugin": "^5.3.1",
+    "@typescript-eslint/parser": "^5.3.1",
     "@umijs/plugin-qiankun": "^2.35.0",
     "@umijs/preset-react": "1.x",
     "@umijs/test": "^3.5.13",
     "commitizen": "^4.2.4",
     "commitlint": "^14.1.0",
     "cross-env": "^7.0.3",
-    "eslint": "^7.31.0",
+    "eslint": "^7.32.0",
+    "eslint-config-alloy": "^4.4.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.26.1",
     "lint-staged": "^11.0.1",
+    "postcss-less": "4.0.0",
     "prettier": "^2.2.0",
     "react-loadable": "^5.5.0",
-    "stylelint": "^13.13.1",
+    "stylelint": "^14.0.1",
+    "stylelint-config-prettier": "^9.0.3",
+    "stylelint-config-rational-order": "^0.1.2",
+    "stylelint-config-standard": "^23.0.0",
+    "stylelint-order": "^5.0.0",
+    "stylelint-prettier": "^2.0.0",
     "typescript": "^4.1.2",
     "yorkie": "^2.0.0"
   }
