@@ -6,7 +6,7 @@
  * @FilePath: /main/src/layouts/index.tsx
  * @Description: 布局入口文件
  */
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { connect } from 'umi';
 import { Link } from 'react-router-dom';
 import type { ConnectRC, Tag } from 'umi';
@@ -53,19 +53,35 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
 
   getThemeStyle();
 
+  useEffect(() => {
+    onresize = () => {
+      document.body.offsetWidth < 1000 && setCollapsed(true);
+      document.body.offsetWidth > 1000 && setCollapsed(false);
+    };
+  }, []);
+
   /**
    * @description: 获取选中的key
    * @param {*}
    * @return {*}
    */
   const getActiveKey = (tags: Tag[]) => {
-    return tags.filter((t) => t.active)[0].key;
+    return tags.filter((t) => t.active)[0];
   };
 
   const customNavData = [
     {
       title: '采购报销',
-      items: ['费用报销单1', '功能名称功能名称2', '功能名称功能名称3', '功能名称功能名称4', '功能名称功能名称5'],
+      items: [
+        '费用报销单1',
+        '功能名称功能名称5',
+        '功能名称功能名称2',
+        '功能名称功能名称3',
+        '功能名称功能名称4',
+        '功能名称功能名称2',
+        '功能名称功能名称3',
+        '功能名称功能名称4',
+      ],
     },
     {
       title: '商旅服务',

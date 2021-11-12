@@ -7,11 +7,11 @@
  * @Description: LocalStorage Key 值
  */
 
- const prefix = 'businessService/'
+const prefix = 'businessService/';
 
 class LocalStorageKey {
-
-   static isLogin =  `${prefix}isLogin`
+  // eslint-disable-next-line @typescript-eslint/explicit-member-accessibility
+  static isLogin = `${prefix}isLogin`;
 }
 
-export default LocalStorageKey
+export default LocalStorageKey;

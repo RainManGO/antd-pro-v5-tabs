@@ -12,6 +12,7 @@ import { render } from 'react-dom';
 
 // @ts-nocheck
 export default class SvgIconTheme extends React.Component {
+  // eslint-disable-next-line @typescript-eslint/explicit-member-accessibility
   constructor(props) {
     super(props);
     this.state = {
@@ -19,9 +20,10 @@ export default class SvgIconTheme extends React.Component {
     };
   }
 
+  // eslint-disable-next-line @typescript-eslint/explicit-member-accessibility
   cancellationContent = (themeChange) => {
     return (
-      <div className={'cancellationTheme'}>
+      <div className="cancellationTheme">
         <span
           dangerouslySetInnerHTML={{ __html: BlackTheme + '幻夜黑（默认）' }}
           onClick={() => {
@@ -46,9 +48,11 @@ export default class SvgIconTheme extends React.Component {
       </div>
     );
   };
+  // eslint-disable-next-line @typescript-eslint/explicit-member-accessibility
   handleVisibleChange = (popVisible) => {
     this.setState({ popVisible });
   };
+  // eslint-disable-next-line @typescript-eslint/explicit-member-accessibility
   render() {
     // const {
     //   type,

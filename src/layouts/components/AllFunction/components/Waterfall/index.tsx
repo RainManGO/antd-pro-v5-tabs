@@ -2,11 +2,11 @@ import React, { useEffect } from 'react';
 
 import './index.less';
 
-type dataType = {
+interface dataType {
   class: string;
   title: string;
   value: string[];
-};
+}
 
 const Waterfall: React.FC<{
   data: dataType[];
@@ -43,9 +43,10 @@ const Waterfall: React.FC<{
     nextTops.fill(0); // 将数组的每一项填充为 0
 
     // 定位
+    // eslint-disable-next-line @typescript-eslint/prefer-for-of
     for (let i = 0; i < divContainer!.children.length; i++) {
       const img = divContainer!.children[i] as any;
-      //找到数组里面的最小值
+      // 找到数组里面的最小值
       const minTop = getMin(nextTops);
       img.style.top = minTop + 'px';
       const index = nextTops.indexOf(minTop);

@@ -14,6 +14,7 @@ class Https {
   public static manager: HttpClient;
   private constructor() {}
 
+  // eslint-disable-next-line @typescript-eslint/member-ordering
   public static shared(httpConfig: HttpClientConfig) {
     if (!Https.manager) {
       Https.manager = new HttpClient(httpConfig);
@@ -21,12 +22,10 @@ class Https {
     return Https.manager;
   }
 
+  // eslint-disable-next-line @typescript-eslint/member-ordering
   public static updateConfig(httpConfig?: HttpClientConfig) {
     if (Https.manager) {
-      Https.manager.httpClient.defaults = Object.assign(
-        Https.manager.httpClient.defaults,
-        httpConfig,
-      );
+      Https.manager.httpClient.defaults = Object.assign(Https.manager.httpClient.defaults, httpConfig);
     } else {
       throw new Error('为创建Https实例');
     }

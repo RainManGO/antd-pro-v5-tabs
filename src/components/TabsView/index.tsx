@@ -61,14 +61,11 @@ const IndexPage: React.FC<TabsViewProps> = (props) => {
     const dom = document.getElementsByClassName('ant-tabs-tab-btn');
     const tabDoms = Array.from(dom);
     // 给每个tabs设置title
-    tabDoms.map((item: any) => {
+    tabDoms.forEach((item: any) => {
       item.title = item.innerText;
     });
   }, [tags]);
-  const tabOnEdit = (
-    targetKey: React.MouseEvent | React.KeyboardEvent | string,
-    action: 'add' | 'remove',
-  ) => {
+  const tabOnEdit = (targetKey: React.MouseEvent | React.KeyboardEvent | string, action: 'add' | 'remove') => {
     if (action === 'remove') {
       dispatch({ type: 'tagsModel/removeTag', payload: targetKey });
     }
@@ -101,18 +98,12 @@ const IndexPage: React.FC<TabsViewProps> = (props) => {
 
   // tabs 点击左箭头
   const clickTabsLeftBtn = () => {
-    const tabsNavListWidth = (document.getElementsByClassName('ant-tabs-nav-list')[0] as any)
-      .offsetWidth;
+    const tabsNavListWidth = (document.getElementsByClassName('ant-tabs-nav-list')[0] as any).offsetWidth;
     const tabsNavWidth = (document.getElementsByClassName('ant-tabs-nav')[0] as any).offsetWidth;
     const strData = getDomTransformData();
     console.log(strData, tabsNavListWidth);
-    if (
-      tabsNavListWidth - (Math.abs(strData) + tabsNavWidth) < 200 &&
-      tabsNavListWidth >= tabsNavWidth
-    ) {
-      (
-        document.getElementsByClassName('ant-tabs-nav-list')[0] as any
-      ).style.transform = `translate(${
+    if (tabsNavListWidth - (Math.abs(strData) + tabsNavWidth) < 200 && tabsNavListWidth >= tabsNavWidth) {
+      (document.getElementsByClassName('ant-tabs-nav-list')[0] as any).style.transform = `translate(${
         Number(strData) - (tabsNavListWidth - (Math.abs(strData) + tabsNavWidth))
       }px, 0px)`;
     }
@@ -123,25 +114,22 @@ const IndexPage: React.FC<TabsViewProps> = (props) => {
     // }
 
     if (Math.abs(strData) < tabsNavListWidth - (tabsNavWidth + 100)) {
-      (
-        document.getElementsByClassName('ant-tabs-nav-list')[0] as any
-      ).style.transform = `translate(${Number(strData) - 100}px, 0px)`;
+      (document.getElementsByClassName('ant-tabs-nav-list')[0] as any).style.transform = `translate(${
+        Number(strData) - 100
+      }px, 0px)`;
     }
   };
   // tabs 点击右箭头
   const clickTabsRightBtn = () => {
-    const tabsNavListWidth = (document.getElementsByClassName('ant-tabs-nav-list')[0] as any)
-      .offsetWidth;
+    const tabsNavListWidth = (document.getElementsByClassName('ant-tabs-nav-list')[0] as any).offsetWidth;
     const strData = getDomTransformData();
     console.log(strData, tabsNavListWidth);
     if (Math.abs(strData) > 100) {
-      (
-        document.getElementsByClassName('ant-tabs-nav-list')[0] as any
-      ).style.transform = `translate(${Number(strData) + 100}px, 0px)`;
+      (document.getElementsByClassName('ant-tabs-nav-list')[0] as any).style.transform = `translate(${
+        Number(strData) + 100
+      }px, 0px)`;
     } else {
-      (
-        document.getElementsByClassName('ant-tabs-nav-list')[0] as any
-      ).style.transform = `translate(0px, 0px)`;
+      (document.getElementsByClassName('ant-tabs-nav-list')[0] as any).style.transform = `translate(0px, 0px)`;
     }
   };
 
@@ -153,14 +141,8 @@ const IndexPage: React.FC<TabsViewProps> = (props) => {
           clickTabsLeftBtn();
         }}
       />
-      <Tabs
-        activeKey={activeKey}
-        type="editable-card"
-        hideAdd={true}
-        onEdit={tabOnEdit}
-        onChange={tabOnChange}
-      >
-        {tags &&
+      <Tabs activeKey={activeKey} type="editable-card" hideAdd={true} onEdit={tabOnEdit} onChange={tabOnChange}>
+        {tags.length &&
           tags.map((tag) => {
             return (
               <TabPane tab={tag.title} key={tag.key} closable={tag.key !== '/dashboard'}>
