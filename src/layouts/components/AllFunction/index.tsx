@@ -456,9 +456,7 @@ const AllFunction: React.FC<{
           </div>
         </div>
       </div>
-      <div className="content">
-        {way === 'Alphabetize' ? <Alphabetize data={data} /> : <Waterfall data={data} />}
-      </div>
+      <div className="content">{way === 'Alphabetize' ? <Alphabetize data={data} /> : <Waterfall data={data} />}</div>
     </div>
   );
 };

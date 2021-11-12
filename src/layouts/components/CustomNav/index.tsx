@@ -3,19 +3,19 @@ import './index.less';
 import { Checkbox, Button, Row, Col, Space } from 'antd';
 import returnImg from '@/assets/return.png';
 
-type customNavData = {
+interface customNavData {
   title: string;
   items: string[];
-};
-type item = {
+}
+interface item {
   data: string;
   checked: boolean;
-};
+}
 
-type rightData = {
+interface rightData {
   title: string;
   items: item[];
-};
+}
 
 const CustomNav: React.FC<{
   isClose: () => void;
@@ -61,14 +61,15 @@ const CustomNav: React.FC<{
   };
 
   const ctrolRightData = (value: string, checked: boolean) => {
-    //超过允许值不可在增加
+    // 超过允许值不可在增加
     if (leftData.length > 4 && checked) {
       return;
     }
-    //处理受控checked
+    // 处理受控checked
     const newRight: any = [];
+    // eslint-disable-next-line array-callback-return
     rightData.map((item) => {
-      const newItems = item.items.map((item1) => {
+      const newItems = item.items.forEach((item1) => {
         if (item1.data === value) {
           ctrolLeftData(value, checked);
           return { ...item1, checked: checked };

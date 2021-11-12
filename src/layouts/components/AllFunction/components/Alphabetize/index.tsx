@@ -2,11 +2,11 @@ import React from 'react';
 
 import './index.less';
 
-type dataType = {
+interface dataType {
   class: string;
   title: string;
   value: string[];
-};
+}
 const Alphabetize: React.FC<{
   data: dataType[];
 }> = (props) => {

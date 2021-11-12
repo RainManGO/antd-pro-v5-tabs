@@ -7,12 +7,12 @@
  * @Description: 文件描述
  */
 
- const IndexPage =  ()=>{ 
- return (
-     <div> 
-         动态路由显示
-         <input></input>
-    </div> 
-    ); 
- } 
- export default IndexPage
+const IndexPage = () => {
+  return (
+    <div>
+      动态路由显示
+      <input />
+    </div>
+  );
+};
+export default IndexPage;

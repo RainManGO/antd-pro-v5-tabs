@@ -7,10 +7,10 @@
  * @Description: 文件描述
  */
 
-export default function(initialState: any) {
-    const {role} = initialState.currentUser;
-    
-    return {
-        canReadAdmin: role !== 'editor',
-    };
-  }
+export default function (initialState: any) {
+  const { role } = initialState.currentUser;
+
+  return {
+    canReadAdmin: role !== 'editor',
+  };
+}

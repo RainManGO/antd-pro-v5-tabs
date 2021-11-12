@@ -105,7 +105,7 @@ const TagsModel: TagsModelType = {
         _remove(ct, (tag: Tag) => tag.key === action.payload);
         // 如果关闭的是当前选中的标签，默认选中最后一个的策略
         ct[ct.length - 1].active = true;
-      }else{
+      } else {
         _remove(ct, (tag: Tag) => tag.key === action.payload);
       }
       return [...ct];
