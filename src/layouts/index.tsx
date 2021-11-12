@@ -57,6 +57,13 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
     onresize = () => {
       document.body.offsetWidth < 1000 && setCollapsed(true);
       document.body.offsetWidth > 1000 && setCollapsed(false);
+      const winHeight = window.innerHeight;
+      const winWidth = window.innerWidth;
+      console.log(innerWidth);
+
+      if (winWidth < 800 || winHeight < 600) {
+        window.resizeTo(800, 600);
+      }
     };
   }, []);
 
@@ -123,7 +130,11 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
         collapsed={collapsed}
         menuHeaderRender={() => {
           return (
-            <div className={`menu-logo ${collapsed ? 'closed' : 'open'}`}>
+            <div
+              className={`menu-logo ${collapsed ? 'closed' : 'open'} ${
+                document.body.offsetWidth < 765 ? 'hiddenLogo' : ''
+              }`}
+            >
               <img src={logoImg} alt="logo未加载" />
               {!collapsed && <img src={logoFontImg} alt="logo未加载" />}
             </div>
