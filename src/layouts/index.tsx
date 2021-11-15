@@ -1,13 +1,12 @@
 /*
  * @Author: ZY
  * @Date: 2021-07-21 11:58:40
- * @LastEditors: ZLL
- * @LastEditTime: 2021-11-05 15:40:25
- * @FilePath: \main\src\layouts\index.tsx
+ * @LastEditors: ZY
+ * @LastEditTime: 2021-11-11 10:34:39
+ * @FilePath: /main/src/layouts/index.tsx
  * @Description: 布局入口文件
  */
-// @ts-nocheck
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { connect } from 'umi';
 import { Link } from 'react-router-dom';
 import type { ConnectRC, Tag } from 'umi';
@@ -17,21 +16,21 @@ import ProLayout, { SettingDrawer } from '@ant-design/pro-layout';
 import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
 import layoutDefaultSettings from '../../config/layoutDefaultSettings';
 import type { ProSettings, BasicLayoutProps as ProLayoutProps } from '@ant-design/pro-layout';
-//主题
-import whiteTheme from '@/themes/whiteTheme.ts';
-import blackTheme from '@/themes/blackTheme.ts';
+// 主题
+import whiteTheme from '@/themes/whiteTheme';
+import blackTheme from '@/themes/blackTheme';
 import '@/themes/theme.less';
-//导入图标
+// 导入图标
 import logoImg from '@/assets/logo.png';
 import logoFontImg from '@/assets/logoFont.png';
 import addPrepareImg from '@/assets/addPrepare.png';
 import bottomMenuNavImg from '@/assets/bottomMenuNav.png';
-//导入组件
+// 导入组件
 import CustomNav from './components/CustomNav';
 import AllFunction from './components/AllFunction';
 import MakeList from './components/MakeList';
 
-//样式
+// 样式
 import './index.less';
 interface LayoutsType extends ProLayoutProps {
   tagsModel: Tag[];
@@ -54,49 +53,55 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
 
   getThemeStyle();
 
+  useEffect(() => {
+    onresize = () => {
+      document.body.offsetWidth < 1000 && setCollapsed(true);
+      document.body.offsetWidth > 1000 && setCollapsed(false);
+    };
+  }, []);
+
   /**
    * @description: 获取选中的key
    * @param {*}
    * @return {*}
    */
   const getActiveKey = (tags: Tag[]) => {
-    return tags.filter((t) => t.active)[0].key;
+    return tags.filter((t) => t.active)[0];
   };
 
   const customNavData = [
     {
       title: '采购报销',
-      items: [
-        '费用报销单1',
-        '功能名称功能名称2',
-        '功能名称功能名称3',
-        '功能名称功能名称4',
-        '功能名称功能名称5',
-      ],
+      items: ['费用报销单1', '功能名称功能名称5', '功能名称功能名称2', '功能名称功能名称3', '功能名称功能名称4'],
     },
     {
       title: '商旅服务',
-      items: [
-        '费用报销单6',
-        '功能名称功能名称7',
-        '功能名称功能名称8',
-        '功能名称功能名称9',
-        '功能名称功能名称10',
-      ],
+      items: ['费用报销单6', '功能名称功能名称7', '功能名称功能名称8', '功能名称功能名称9', '功能名称功能名称10'],
     },
     {
       title: '销售业务',
-      items: [
-        '费用报销单11',
-        '功能名称功能名称12',
-        '功能名称功能名称13',
-        '功能名称功能名称14',
-        '功能名称功能名称15',
-      ],
+      items: ['费用报销单11', '功能名称功能名称12', '功能名称功能名称13', '功能名称功能名称14', '功能名称功能名称15'],
+    },
+    {
+      title: '总账业务',
+      items: ['费用报销单16', '功能名称功能名称17', '功能名称功能名称18', '功能名称功能名称19', '功能名称功能名称20'],
+    },
+    {
+      title: '商旅服务',
+      items: ['费用报销单6', '功能名称功能名称7', '功能名称功能名称8', '功能名称功能名称9', '功能名称功能名称10'],
+    },
+    {
+      title: '销售业务',
+      items: ['费用报销单11', '功能名称功能名称12', '功能名称功能名称13', '功能名称功能名称14', '功能名称功能名称15'],
     },
     {
       title: '总账业务',
       items: [
+        '费用报销单16',
+        '功能名称功能名称17',
+        '功能名称功能名称18',
+        '功能名称功能名称19',
+        '功能名称功能名称20',
         '费用报销单16',
         '功能名称功能名称17',
         '功能名称功能名称18',
@@ -107,7 +112,7 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
   ];
 
   function getThemeStyle() {
-    const themeStyle1 = theme == 'black' ? blackTheme : whiteTheme;
+    const themeStyle1 = theme === 'black' ? blackTheme : whiteTheme;
     themeStyle1.forEach((item: any) => {
       document.body.style.setProperty(item.property, item.value);
     });
@@ -118,6 +123,7 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
     setTheme(themes);
     getThemeStyle();
   }
+
   return (
     <div
       id="test-pro-layout"
@@ -131,7 +137,11 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
         collapsed={collapsed}
         menuHeaderRender={() => {
           return (
-            <div className={`menu-logo ${collapsed ? 'closed' : 'open'}`}>
+            <div
+              className={`menu-logo ${collapsed ? 'closed' : 'open'} ${
+                document.body.offsetWidth < 765 ? 'hiddenLogo' : ''
+              }`}
+            >
               <img src={logoImg} alt="logo未加载" />
               {!collapsed && <img src={logoFontImg} alt="logo未加载" />}
             </div>
@@ -172,16 +182,14 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
                   <img src={addPrepareImg} alt="加载失败..." />
                   {!menu.collapsed && <p>我要制单</p>}
                 </div>
-                {open.MakeList && (
-                  <div className={`makelist-nav ${menu?.collapsed ? 'closed' : 'open'}`}>
-                    <MakeList data={111} />
-                  </div>
-                )}
+                <div className={`makelist-nav ${menu?.collapsed ? 'closed' : 'open'}`}>
+                  <MakeList data={111} />
+                </div>
               </div>
               <div className={`divider ${menu?.collapsed ? 'closed' : 'open'}`} />
               <div className={`all-function ${menu?.collapsed ? 'closed' : 'open'}`}>
                 <div
-                  className={'position'}
+                  className="position"
                   onClick={() => {
                     setOpen({
                       MakeList: false,
@@ -193,20 +201,18 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
                   <img src={bottomMenuNavImg} alt="加载失败..." />
                   {!menu?.collapsed && '全部功能'}
                 </div>
-                {open.AllFunction && (
-                  <div className={`allfunction-nav ${menu?.collapsed ? 'closed' : 'open'}`}>
-                    <AllFunction />
-                  </div>
-                )}
+                <div className={`allfunction-nav ${menu?.collapsed ? 'closed' : 'open'}`}>
+                  <AllFunction data={111} />
+                </div>
               </div>
             </div>
           );
         }}
         menuFooterRender={(menu) => {
           return (
-            <div onClick={refresh} className={`bottomNav ${menu?.collapsed ? 'closed' : 'open'}`}>
+            <div onClick={refresh} className={`bottom-nav ${menu?.collapsed ? 'closed' : 'open'}`}>
               <div
-                className={'position'}
+                className="position"
                 onClick={() => {
                   setOpen({
                     MakeList: false,
@@ -219,7 +225,7 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
                 {!menu?.collapsed && '自定义导航'}
               </div>
               {open.CustomNav && (
-                <div className="custom-nav-wrap">
+                <div className={`custom-nav-wrap ${menu?.collapsed ? 'closed' : 'open'}`}>
                   <CustomNav
                     isClose={() => {
                       setOpen({

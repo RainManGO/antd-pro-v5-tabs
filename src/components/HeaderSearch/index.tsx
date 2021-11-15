@@ -7,7 +7,7 @@ import React, { useRef } from 'react';
 import classNames from 'classnames';
 import styles from './index.less';
 
-export type HeaderSearchProps = {
+export interface HeaderSearchProps {
   onSearch?: (value?: string) => void;
   onChange?: (value?: string) => void;
   onVisibleChange?: (b: boolean) => void;
@@ -18,18 +18,10 @@ export type HeaderSearchProps = {
   visible?: boolean;
   defaultValue?: string;
   value?: string;
-};
+}
 
 const HeaderSearch: React.FC<HeaderSearchProps> = (props) => {
-  const {
-    className,
-    defaultValue,
-    onVisibleChange,
-    placeholder,
-    visible,
-    defaultVisible,
-    ...restProps
-  } = props;
+  const { className, defaultValue, onVisibleChange, placeholder, visible, defaultVisible, ...restProps } = props;
 
   const inputRef = useRef<Input | null>(null);
 

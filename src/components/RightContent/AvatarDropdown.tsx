@@ -7,9 +7,9 @@ import HeaderDropdown from '../HeaderDropdown';
 import styles from './index.less';
 // import { outLogin } from '@/services/ant-design-pro/api';
 
-export type GlobalHeaderRightProps = {
+export interface GlobalHeaderRightProps {
   menu?: boolean;
-};
+}
 
 /**
  * 退出登录，并且将当前的 url 保存

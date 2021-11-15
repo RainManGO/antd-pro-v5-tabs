@@ -34,5 +34,10 @@ export interface LoginResult {
 }
 
 export function login(username: string, password: string) {
-  return https.request<LoginResult>('auth/blade-auth/oauth/token',Method.POST,{username,password,'grant_type':'captcha'},ContentType.form);
+  return https.request<LoginResult>(
+    'auth/blade-auth/oauth/token',
+    Method.POST,
+    { username, password, grant_type: 'captcha' },
+    ContentType.form,
+  );
 }

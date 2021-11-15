@@ -6,6 +6,7 @@
   :global(.anticon) {
     margin-right: 8px;
   }
+
   :global(.ant-dropdown-menu-item) {
     min-width: 160px;
   }
@@ -17,6 +18,7 @@
   height: 48px;
   margin-left: auto;
   overflow: hidden;
+
   .action {
     display: flex;
     align-items: center;
@@ -24,28 +26,34 @@
     padding: 0 12px;
     cursor: pointer;
     transition: all 0.3s;
+
     > span {
       vertical-align: middle;
     }
+
     &:hover {
       background: @pro-header-hover-bg;
     }
+
     &:global(.opened) {
       background: @pro-header-hover-bg;
     }
   }
+
   .search {
     padding: 0 12px;
+
     &:hover {
       background: transparent;
     }
   }
+
   .account {
     .avatar {
       margin-right: 8px;
       color: @primary-color;
       vertical-align: top;
-      background: rgba(255, 255, 255, 0.85);
+      background: rgb(255 255 255 / 85%);
     }
   }
 }
@@ -55,6 +63,7 @@
     &:hover {
       background: #252a3d;
     }
+
     &:global(.opened) {
       background: #252a3d;
     }
@@ -64,28 +73,34 @@
 .rightContentWrap {
   display: flex;
   width: 100%;
+
   .left {
     flex: 1 1 auto;
     width: 800px;
     text-align: center;
   }
+
   .right {
     display: flex;
     flex: 0 0 auto;
     align-items: center;
     justify-content: space-around;
     width: 370px;
+
     .message {
       position: relative;
       top: 2px;
       cursor: pointer;
+
       img {
         width: 20px;
       }
     }
+
     .setting {
       margin-right: -10px;
       cursor: pointer;
+
       img {
         position: relative;
         top: -1px;
@@ -99,6 +114,7 @@
   .rightContentWrap {
     display: flex;
     width: 100%;
+
     .left {
       display: none;
     }
@@ -108,12 +124,14 @@
   .rightContentWrap {
     display: flex;
     width: 100%;
+
     .right {
       display: flex;
       flex: 0 0 auto;
       align-items: center;
       justify-content: space-around;
       width: 230px;
+
       .weather {
         display: none;
       }

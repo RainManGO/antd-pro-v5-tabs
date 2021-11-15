@@ -11,11 +11,9 @@ import { Button } from 'antd';
 import { history } from 'umi';
 
 const IndexPage = () => {
-
   const openFormDetail = () => {
     history.push(`/detail/0`);
   };
-
 
   const openFormDetail1 = () => {
     history.push(`/detail/1`);
@@ -24,10 +22,9 @@ const IndexPage = () => {
   return (
     <div>
       动态注册路由
-      <input></input>
+      <input />
       <Button onClick={openFormDetail}>打开表单详情</Button>
       <Button onClick={openFormDetail1}>打开表单详情1</Button>
-
     </div>
   );
 };

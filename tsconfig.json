@@ -33,9 +33,10 @@
     "config/**/*",
     "typings.d.ts",
     ".eslintrc.js",
-    ".stylelintrc.js",
+    ".stylelintrc.json",
     ".prettierrc.js",
     "jest.config.js",
+    "typings.d.ts",
     "mock/*"
   ],
   "exclude": ["node_modules", "build", "dist", "scripts", "src/.umi/*", "webpack", "jest"]
