@@ -12,14 +12,14 @@ const Waterfall: React.FC<{
   data: dataType[];
 }> = (props) => {
   const { data } = props;
-  const [colums, setColums] = useState(0);
+  const [colums, setColums] = useState(5);
 
   const items = data.map((item, index) => {
     const children = item.value.map((child, i) => {
       return <dd key={(i + child).toString()}>{child}</dd>;
     });
     return (
-      <div className="item" key={index.toString()}>
+      <div className={`item ${index >= colums && 'border-top'}`} key={index.toString()}>
         <h2>{item.title}</h2>
         <dl>{children}</dl>
       </div>
@@ -40,14 +40,16 @@ const Waterfall: React.FC<{
   const setPositon = () => {
     const divContainer = document.getElementById('waterfall-wrap');
     // 初次进入没有缩放窗口时设置列数
-    const setNewColums = Math.floor(window.innerWidth / 345);
+    const setNewColums = Math.floor(window.innerWidth / 340);
     setColums(setNewColums);
 
     // 缩放窗口时重新设置列数
     window.addEventListener('resize', () => {
-      const setNewColums = Math.floor(window.innerWidth / 345);
+      const setNewColums = Math.floor(window.innerWidth / 340);
       setColums(setNewColums);
     });
+    console.log(colums);
+
     const nextTops = new Array<number>(colums); // 数组的长度初始化为列数的个数
     nextTops.fill(0); // 将数组的每一项填充为 0
 
