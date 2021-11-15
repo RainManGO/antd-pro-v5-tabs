@@ -49,10 +49,10 @@ const CustomNav: React.FC<{
   }, []);
 
   const ctrolLeftData = (value: string, checked: boolean) => {
-    const leftDataEdit: item[] = [...leftData];
+    let leftDataEdit: item[] = [...leftData];
     let newLeftData: item[] = [];
     if (checked) {
-      leftDataEdit.push({ data: value, checked: true });
+      leftDataEdit = [{ data: value, checked: true }, ...leftDataEdit];
       setLeftData(leftDataEdit);
     } else {
       newLeftData = leftDataEdit.filter((item) => value !== item.data);
@@ -62,14 +62,14 @@ const CustomNav: React.FC<{
 
   const ctrolRightData = (value: string, checked: boolean) => {
     // 超过允许值不可在增加
-    if (leftData.length > 4 && checked) {
+    if (leftData.length > 16 && checked) {
       return;
     }
     // 处理受控checked
     const newRight: any = [];
     // eslint-disable-next-line array-callback-return
     rightData.map((item) => {
-      const newItems = item.items.forEach((item1) => {
+      const newItems = item.items.map((item1) => {
         if (item1.data === value) {
           ctrolLeftData(value, checked);
           return { ...item1, checked: checked };
@@ -112,6 +112,8 @@ const CustomNav: React.FC<{
 
   const selectItems = () => {
     return rightData.map((item1, i) => {
+      // eslint-disable-next-line no-debugger
+      // debugger;
       const selectItem = item1.items.map((item2, index) => {
         return (
           <dd key={(item2.data + index).toString()}>
@@ -148,7 +150,7 @@ const CustomNav: React.FC<{
         <div className="left">
           <ul>{leftDataArr()}</ul>
           <div className="tip">
-            {leftData.length} <span>/5</span>
+            {leftData.length} <span>/17</span>
           </div>
         </div>
         <div className="right">
@@ -158,23 +160,18 @@ const CustomNav: React.FC<{
         </div>
       </div>
       <div className="footer">
-        <Row>
-          <Space size="large">
-            <Col>
-              <Button type="primary">确定</Button>
-            </Col>
-            <Col>
-              <Button
-                type="primary"
-                onClick={() => {
-                  isClose();
-                }}
-              >
-                取消
-              </Button>
-            </Col>
-          </Space>
-        </Row>
+        <Button type="primary">确定</Button>
+        <Button
+          type="primary"
+          onClick={() => {
+            isClose();
+          }}
+          style={{
+            marginLeft: '10px',
+          }}
+        >
+          取消
+        </Button>
       </div>
     </div>
   );
