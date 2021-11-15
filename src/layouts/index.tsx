@@ -1,9 +1,9 @@
 /*
  * @Author: ZY
  * @Date: 2021-07-21 11:58:40
- * @LastEditors: ZY
- * @LastEditTime: 2021-11-11 10:34:39
- * @FilePath: /main/src/layouts/index.tsx
+ * @LastEditors: ZLL
+ * @LastEditTime: 2021-11-15 15:02:52
+ * @FilePath: \main\src\layouts\index.tsx
  * @Description: 布局入口文件
  */
 import { useEffect, useState } from 'react';
@@ -66,7 +66,7 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
    * @return {*}
    */
   const getActiveKey = (tags: Tag[]) => {
-    return tags.filter((t) => t.active)[0];
+    return tags.filter((t) => t.active)[0].key;
   };
 
   const customNavData = [
