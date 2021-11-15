@@ -72,16 +72,7 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
   const customNavData = [
     {
       title: '采购报销',
-      items: [
-        '费用报销单1',
-        '功能名称功能名称5',
-        '功能名称功能名称2',
-        '功能名称功能名称3',
-        '功能名称功能名称4',
-        '功能名称功能名称2',
-        '功能名称功能名称3',
-        '功能名称功能名称4',
-      ],
+      items: ['费用报销单1', '功能名称功能名称5', '功能名称功能名称2', '功能名称功能名称3', '功能名称功能名称4'],
     },
     {
       title: '商旅服务',
@@ -94,6 +85,29 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
     {
       title: '总账业务',
       items: ['费用报销单16', '功能名称功能名称17', '功能名称功能名称18', '功能名称功能名称19', '功能名称功能名称20'],
+    },
+    {
+      title: '商旅服务',
+      items: ['费用报销单6', '功能名称功能名称7', '功能名称功能名称8', '功能名称功能名称9', '功能名称功能名称10'],
+    },
+    {
+      title: '销售业务',
+      items: ['费用报销单11', '功能名称功能名称12', '功能名称功能名称13', '功能名称功能名称14', '功能名称功能名称15'],
+    },
+    {
+      title: '总账业务',
+      items: [
+        '费用报销单16',
+        '功能名称功能名称17',
+        '功能名称功能名称18',
+        '功能名称功能名称19',
+        '功能名称功能名称20',
+        '费用报销单16',
+        '功能名称功能名称17',
+        '功能名称功能名称18',
+        '功能名称功能名称19',
+        '功能名称功能名称20',
+      ],
     },
   ];
 
@@ -211,7 +225,7 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
                 {!menu?.collapsed && '自定义导航'}
               </div>
               {open.CustomNav && (
-                <div className="custom-nav-wrap">
+                <div className={`custom-nav-wrap ${menu?.collapsed ? 'closed' : 'open'}`}>
                   <CustomNav
                     isClose={() => {
                       setOpen({
