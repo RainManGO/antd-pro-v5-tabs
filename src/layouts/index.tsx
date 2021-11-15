@@ -57,13 +57,6 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
     onresize = () => {
       document.body.offsetWidth < 1000 && setCollapsed(true);
       document.body.offsetWidth > 1000 && setCollapsed(false);
-      const winHeight = window.innerHeight;
-      const winWidth = window.innerWidth;
-      console.log(innerWidth);
-
-      if (winWidth < 800 || winHeight < 600) {
-        window.resizeTo(800, 600);
-      }
     };
   }, []);
 

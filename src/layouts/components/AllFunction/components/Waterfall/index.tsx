@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import './index.less';
 
@@ -12,6 +12,7 @@ const Waterfall: React.FC<{
   data: dataType[];
 }> = (props) => {
   const { data } = props;
+  const [colums, setColums] = useState(0);
 
   const items = data.map((item, index) => {
     const children = item.value.map((child, i) => {
@@ -38,8 +39,16 @@ const Waterfall: React.FC<{
 
   const setPositon = () => {
     const divContainer = document.getElementById('waterfall-wrap');
+    // 初次进入没有缩放窗口时设置列数
+    const setNewColums = Math.floor(window.innerWidth / 345);
+    setColums(setNewColums);
 
-    const nextTops = new Array<number>(5); // 数组的长度初始化为列数的个数
+    // 缩放窗口时重新设置列数
+    window.addEventListener('resize', () => {
+      const setNewColums = Math.floor(window.innerWidth / 345);
+      setColums(setNewColums);
+    });
+    const nextTops = new Array<number>(colums); // 数组的长度初始化为列数的个数
     nextTops.fill(0); // 将数组的每一项填充为 0
 
     // 定位
@@ -59,7 +68,7 @@ const Waterfall: React.FC<{
 
   useEffect(() => {
     setPositon();
-  }, []);
+  }, [colums]);
 
   return (
     <div id="waterfall-wrap" className="waterfall-wrap">
