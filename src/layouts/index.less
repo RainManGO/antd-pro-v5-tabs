@@ -38,6 +38,12 @@
           // margin: 0 auto;
         }
       }
+      &.closed.hiddenLogo {
+        img {
+          margin-top: 9px;
+          margin-left: -10px;
+        }
+      }
     }
   }
 }
@@ -274,4 +280,15 @@
 }
 .ant-pro-basicLayout-content {
   margin: 0;
+}
+
+.mask {
+  position: fixed;
+  top: 0;
+  left: 228px;
+  right: 0;
+  bottom: 0;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.45);
+  z-index: 9999;
 }
