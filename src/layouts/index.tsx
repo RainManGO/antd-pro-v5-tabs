@@ -55,8 +55,9 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
 
   useEffect(() => {
     onresize = () => {
-      document.body.offsetWidth < 1000 && setCollapsed(true);
-      document.body.offsetWidth > 1000 && setCollapsed(false);
+      const getOffsetWidth = document.body.offsetWidth;
+      getOffsetWidth < 1000 && setCollapsed(true);
+      getOffsetWidth > 1000 && setCollapsed(false);
     };
   }, []);
 
@@ -137,6 +138,16 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
         height: '100vh',
       }}
     >
+      {!collapsed && document.body.offsetWidth < 768 && (
+        <div
+          className="mask"
+          onClick={() => {
+            console.log(6666);
+            setCollapsed(!collapsed);
+          }}
+          style={{ zIndex: 9999 }}
+        />
+      )}
       <ProLayout
         {...settings}
         {...layoutDefaultSettings}
