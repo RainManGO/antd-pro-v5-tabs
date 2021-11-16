@@ -138,7 +138,7 @@
                 dd {
                   display: flex;
                   float: left;
-                  width: 161px;
+                  width: 150px;
                   height: 20px;
                   margin: 0;
                   margin-top: 10px;
@@ -147,12 +147,27 @@
                   line-height: 20px;
                   text-align: start;
 
-                  div {
-                    display: box;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    -webkit-line-clamp: 1;
-                    -webkit-box-orient: vertical;
+                  .ant-checkbox-wrapper {
+                    width: 100%;
+                    height: 100%;
+                    span.ant-checkbox {
+                      display: inline-block;
+                      width: 18px;
+                    }
+                    > span:nth-child(2) {
+                      display: inline-block;
+                      padding: 0;
+                      line-height: 20px;
+                      width: 132px;
+                      padding-left: 5px;
+                      div.select-content {
+                        width: 132px;
+                        height: 20px;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                      }
+                    }
                   }
                 }
               }

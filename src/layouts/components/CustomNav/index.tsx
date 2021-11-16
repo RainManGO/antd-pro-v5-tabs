@@ -118,7 +118,7 @@ const CustomNav: React.FC<{
         return (
           <dd key={(item2.data + index).toString()}>
             <Checkbox value={item2.data} checked={item2.checked} onChange={onChange}>
-              <div>{item2.data}</div>
+              <div className="select-content">{item2.data}</div>
             </Checkbox>
           </dd>
         );
