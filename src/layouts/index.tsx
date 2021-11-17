@@ -193,11 +193,34 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
                       AllFunction: false,
                     });
                   }}
+                  onMouseLeave={() => {
+                    setOpen({
+                      MakeList: false,
+                      CustomNav: false,
+                      AllFunction: false,
+                    });
+                  }}
                 >
                   <img src={addPrepareImg} alt="加载失败..." />
                   {!menu.collapsed && <p>我要制单</p>}
                 </div>
-                <div className={`makelist-nav ${menu?.collapsed ? 'closed' : 'open'}`}>
+                <div
+                  className={`makelist-nav ${menu?.collapsed ? 'closed' : 'open'}`}
+                  onMouseLeave={() => {
+                    setOpen({
+                      MakeList: false,
+                      CustomNav: false,
+                      AllFunction: false,
+                    });
+                  }}
+                  onMouseEnter={() => {
+                    setOpen({
+                      MakeList: true,
+                      CustomNav: false,
+                      AllFunction: false,
+                    });
+                  }}
+                >
                   <MakeList data={111} />
                 </div>
               </div>
@@ -212,6 +235,13 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
                       AllFunction: true,
                     });
                   }}
+                  onMouseLeave={() => {
+                    setOpen({
+                      MakeList: false,
+                      CustomNav: false,
+                      AllFunction: false,
+                    });
+                  }}
                 >
                   <img src={bottomMenuNavImg} alt="加载失败..." />
                   {!menu?.collapsed && <p>全部功能</p>}
@@ -224,6 +254,13 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
                         MakeList: false,
                         CustomNav: false,
                         AllFunction: false,
+                      });
+                    }}
+                    onMouseEnter={() => {
+                      setOpen({
+                        MakeList: false,
+                        CustomNav: false,
+                        AllFunction: true,
                       });
                     }}
                   >
