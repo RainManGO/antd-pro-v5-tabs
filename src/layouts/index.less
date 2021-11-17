@@ -1,13 +1,13 @@
 .ant-layout {
-  .menu-logo.closed {
-    width: 48px;
-    margin-left: -15px;
-    img {
-      width: 47px;
-      height: 47px;
-      margin: 0 auto;
-    }
-  }
+  // .menu-logo.closed {
+  //   width: 48px;
+  //   margin-left: -15px;
+  //   img {
+  //     width: 47px;
+  //     height: 47px;
+  //     margin: 0 auto;
+  //   }
+  // }
   &.ant-layout-has-sider {
     .menu-logo {
       display: flex;
@@ -31,17 +31,21 @@
 
       &.closed {
         width: 48px;
-        margin-left: 1px;
+        height: 56px;
+        align-items: center;
+        // margin-left: 1px;
+        background: #162841;
         img {
-          width: 47px;
-          height: 47px;
+          width: 48px;
+          height: 48px;
+          margin-top: 4px;
           // margin: 0 auto;
         }
       }
       &.closed.hiddenLogo {
         img {
-          margin-top: 9px;
-          margin-left: -10px;
+          // margin-top: 9px;
+          // margin-left: -10px;
         }
       }
     }
@@ -62,8 +66,10 @@
     width: 100%;
     height: 57px;
     margin: 0;
+    padding: 0;
     line-height: 57px;
     cursor: pointer;
+    // border: 1px solid red;
 
     .position.open {
       display: flex;
@@ -282,6 +288,10 @@
   margin: 0;
 }
 
+.ant-drawer-mask {
+  display: none;
+}
+
 .mask {
   position: fixed;
   top: 0;
@@ -290,5 +300,5 @@
   bottom: 0;
   cursor: pointer;
   background-color: rgba(0, 0, 0, 0.45);
-  z-index: 9999;
+  z-index: 1001;
 }
