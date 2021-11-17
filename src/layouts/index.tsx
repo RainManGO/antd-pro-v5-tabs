@@ -142,10 +142,8 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
         <div
           className="mask"
           onClick={() => {
-            console.log(6666);
             setCollapsed(!collapsed);
           }}
-          style={{ zIndex: 9999 }}
         />
       )}
       <ProLayout
