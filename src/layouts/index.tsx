@@ -138,7 +138,7 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
         height: '100vh',
       }}
     >
-      {!collapsed && document.body.offsetWidth <= 768 && (
+      {!collapsed && document.body.offsetWidth <= 768 && !open.AllFunction && !open.MakeList && (
         <div
           className="mask"
           onClick={() => {
@@ -186,9 +186,9 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
               <div className="zhidan">
                 <div
                   className={`position ${menu.collapsed ? 'closed' : 'open'}`}
-                  onClick={() => {
+                  onMouseEnter={() => {
                     setOpen({
-                      MakeList: !open.MakeList,
+                      MakeList: true,
                       CustomNav: false,
                       AllFunction: false,
                     });
@@ -205,20 +205,31 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
               <div className={`all-function ${menu?.collapsed ? 'closed' : 'open'}`}>
                 <div
                   className="position"
-                  onClick={() => {
+                  onMouseEnter={() => {
                     setOpen({
                       MakeList: false,
                       CustomNav: false,
-                      AllFunction: !open.AllFunction,
+                      AllFunction: true,
                     });
                   }}
                 >
                   <img src={bottomMenuNavImg} alt="加载失败..." />
                   {!menu?.collapsed && <p>全部功能</p>}
                 </div>
-                <div className={`allfunction-nav ${menu?.collapsed ? 'closed' : 'open'}`}>
-                  <AllFunction data={111} />
-                </div>
+                {open.AllFunction && (
+                  <div
+                    className={`allfunction-nav ${menu?.collapsed ? 'closed' : 'open'}`}
+                    onMouseLeave={() => {
+                      setOpen({
+                        MakeList: false,
+                        CustomNav: false,
+                        AllFunction: false,
+                      });
+                    }}
+                  >
+                    <AllFunction data={111} />
+                  </div>
+                )}
               </div>
             </div>
           );
