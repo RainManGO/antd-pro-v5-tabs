@@ -138,7 +138,7 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
         height: '100vh',
       }}
     >
-      {!collapsed && document.body.offsetWidth < 768 && (
+      {!collapsed && document.body.offsetWidth <= 768 && (
         <div
           className="mask"
           onClick={() => {
@@ -154,7 +154,7 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
           return (
             <div
               className={`menu-logo ${collapsed ? 'closed' : 'open'} ${
-                document.body.offsetWidth < 765 ? 'hiddenLogo' : ''
+                document.body.offsetWidth < 765 ? `hiddenLogo fix-header` : ''
               }`}
             >
               <img src={logoImg} alt="logo未加载" />
@@ -214,7 +214,7 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
                   }}
                 >
                   <img src={bottomMenuNavImg} alt="加载失败..." />
-                  {!menu?.collapsed && '全部功能'}
+                  {!menu?.collapsed && <p>全部功能</p>}
                 </div>
                 <div className={`allfunction-nav ${menu?.collapsed ? 'closed' : 'open'}`}>
                   <AllFunction data={111} />

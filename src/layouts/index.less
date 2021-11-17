@@ -1,13 +1,14 @@
 .ant-layout {
-  // .menu-logo.closed {
-  //   width: 48px;
-  //   margin-left: -15px;
-  //   img {
-  //     width: 47px;
-  //     height: 47px;
-  //     margin: 0 auto;
-  //   }
-  // }
+  .menu-logo.closed.hiddenLogo {
+    width: 48px;
+    background-color: none;
+    margin-left: -15px;
+    img {
+      width: 47px;
+      height: 47px;
+      margin: 0 auto;
+    }
+  }
   &.ant-layout-has-sider {
     .menu-logo {
       display: flex;
@@ -43,9 +44,13 @@
         }
       }
       &.closed.hiddenLogo {
+        background: none;
+        width: 48px;
+        margin-left: -15px;
         img {
-          // margin-top: 9px;
-          // margin-left: -10px;
+          width: 47px;
+          height: 47px;
+          margin: 0 auto;
         }
       }
     }
@@ -69,23 +74,22 @@
     padding: 0;
     line-height: 57px;
     cursor: pointer;
-    // border: 1px solid red;
 
     .position.open {
       display: flex;
       height: 57px;
-
+      padding: 22px 0 0 14px;
       img {
-        width: 14px;
-        height: 14px;
-        margin-top: 22px;
-        margin-left: 16px;
+        width: 16px;
+        height: 16px;
       }
 
       p {
         margin-left: 9px;
         color: gray;
         font-size: 14px;
+        height: 16px;
+        line-height: 16px;
       }
 
       &:hover {
@@ -98,13 +102,13 @@
     }
 
     .position.closed {
-      width: 100%;
-      text-align: center;
+      display: flex;
+      height: 57px;
+      padding: 22px 0 0 14px;
 
       img {
-        width: 14px;
-        height: 14px;
-        margin-left: -3px;
+        width: 16px;
+        height: 16px;
       }
     }
 
@@ -150,23 +154,14 @@
     cursor: pointer;
 
     &.open {
-      display: flex;
       height: 40px;
 
-      &:hover {
-        background: #162841;
-
-        .position {
-          color: white;
-          font-weight: 500;
-          font-family: 'PingFang SC';
-        }
-      }
-
       .position {
-        width: 208px;
-        margin: 0 auto;
-        color: gray;
+        height: 40px;
+        display: flex;
+        font-weight: 500;
+        font-family: 'PingFang SC';
+        padding: 13px 0 0 10px;
 
         img {
           width: 14px;
@@ -175,17 +170,44 @@
           margin-right: 9px;
           margin-left: 5px;
         }
+
+        p {
+          color: gray;
+          font-size: 14px;
+          height: 16px;
+          line-height: 14px;
+        }
+      }
+    }
+
+    &:hover {
+      background: #162841;
+      .position {
+        p {
+          color: white;
+        }
       }
     }
 
     &.closed {
       width: 100%;
+      height: 40px;
       cursor: pointer;
 
-      img {
-        width: 14px;
-        height: 14px;
-        margin: 16px;
+      .position {
+        height: 40px;
+        display: flex;
+        font-weight: 500;
+        font-family: 'PingFang SC';
+        padding: 13px 0 0 10px;
+
+        img {
+          width: 14px;
+          height: 14px;
+          margin-top: -1px;
+          margin-right: 9px;
+          margin-left: 5px;
+        }
       }
     }
 
