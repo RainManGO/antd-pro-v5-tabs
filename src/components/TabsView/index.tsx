@@ -25,6 +25,7 @@ const { TabPane } = Tabs;
 
 const IndexPage: React.FC<TabsViewProps> = (props) => {
   const { tags, activeKey, dispatch, route } = props;
+  console.log(tags);
 
   useEffect(() => {
     const getTitleFromRoute = (path: string) => {
@@ -85,6 +86,7 @@ const IndexPage: React.FC<TabsViewProps> = (props) => {
       }
       return t.path === path;
     })[0];
+
     return (r as any).component;
   };
 

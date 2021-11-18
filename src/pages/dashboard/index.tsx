@@ -7,8 +7,9 @@
  * @Description: 文件描述
  */
 import React from 'react';
+import './index.less';
 
 const IndexPage: React.FC<{}> = () => {
-  return <div>xxx</div>;
+  return <div className="table-list">5555</div>;
 };
 export default IndexPage;
