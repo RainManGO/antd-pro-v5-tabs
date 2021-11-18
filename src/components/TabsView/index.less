@@ -1,7 +1,23 @@
 .tabsBox {
   display: flex;
+  height: 100%;
+  position: relative;
   flex-direction: row;
 
+  .tabsRightButtonList {
+    display: flex;
+    float: right;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 40px;
+  }
+
+  .tabsLeftButton {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
   .tabsLeftButton,
   .tabsRightButton,
   .dropDownArrow {
@@ -36,6 +52,8 @@
       height: 40px;
       padding-top: 3px;
       background: #fff;
+      padding-left: 41px;
+      margin-bottom: 8px;
     }
 
     .ant-tabs-card.ant-tabs-top > .ant-tabs-nav .ant-tabs-tab + .ant-tabs-tab {
@@ -101,6 +119,13 @@
       text-overflow: ellipsis;
       word-break: keep-all;
       transition: none;
+    }
+
+    .ant-tabs-content-holder {
+      height: calc(100% - 48px);
+    }
+    .ant-tabs-content {
+      height: 100%;
     }
   }
 }

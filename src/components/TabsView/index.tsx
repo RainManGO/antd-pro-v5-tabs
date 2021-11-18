@@ -137,12 +137,6 @@ const IndexPage: React.FC<TabsViewProps> = (props) => {
 
   return (
     <div className={styles.tabsBox}>
-      <div
-        className={styles.tabsLeftButton}
-        onClick={() => {
-          clickTabsLeftBtn();
-        }}
-      />
       <Tabs activeKey={activeKey} type="editable-card" hideAdd={true} onEdit={tabOnEdit} onChange={tabOnChange}>
         {tags.length &&
           tags.map((tag) => {
@@ -154,12 +148,20 @@ const IndexPage: React.FC<TabsViewProps> = (props) => {
           })}
       </Tabs>
       <div
-        className={styles.tabsRightButton}
+        className={styles.tabsLeftButton}
         onClick={() => {
-          clickTabsRightBtn();
+          clickTabsLeftBtn();
         }}
       />
-      <div className={styles.dropDownArrow} />
+      <div className={styles.tabsRightButtonList}>
+        <div
+          className={styles.tabsRightButton}
+          onClick={() => {
+            clickTabsRightBtn();
+          }}
+        />
+        <div className={styles.dropDownArrow} />
+      </div>
     </div>
   );
 };
