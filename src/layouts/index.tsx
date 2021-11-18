@@ -38,8 +38,6 @@ interface LayoutsType extends ProLayoutProps {
 }
 
 const IndexPage: ConnectRC<LayoutsType> = (props) => {
-  console.log('props', props);
-
   const [settings, setSetting] = useState<Partial<ProSettings> | undefined>({ fixSiderbar: true });
   const [collapsed, setCollapsed] = useState(false);
   const [theme, setTheme] = useState(localStorage.getItem('selectedTheme') ?? 'black');
