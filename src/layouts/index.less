@@ -326,9 +326,11 @@
 // 窗口抖动处理
 body::-webkit-scrollbar {
   display: none;
+  overflow: hidden;
 }
 
 #myWrapperLoading {
   box-sizing: border-box;
-  height: 100%;
+  height: calc(100vh - 56px);
+  overflow: hidden;
 }

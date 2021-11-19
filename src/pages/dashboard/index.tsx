@@ -8,8 +8,13 @@
  */
 import React from 'react';
 import './index.less';
+import TableAntPro from '@/components/TableList';
 
 const IndexPage: React.FC<{}> = () => {
-  return <div className="table-list">5555</div>;
+  return (
+    <div className="table-list">
+      <TableAntPro />
+    </div>
+  );
 };
 export default IndexPage;
