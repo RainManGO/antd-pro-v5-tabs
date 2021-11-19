@@ -1,0 +1,126 @@
+.ant-table-wrap {
+  .ant-header {
+    .top {
+      display: flex;
+      justify-content: space-between;
+      height: 61px;
+      margin-left: 26px;
+      margin-right: 16px;
+      border-bottom: 1px solid #ccc;
+      .left {
+        dl {
+          display: flex;
+          height: 61px;
+          line-height: 61px;
+          dd {
+            height: 61px;
+            margin-right: 35px;
+            font-size: 16px;
+            cursor: pointer;
+            span {
+              margin-right: 2px;
+            }
+          }
+          dd.active {
+            color: #118eea;
+            border-bottom: 3px solid #118eea;
+          }
+        }
+      }
+      .right {
+        height: 61px;
+        margin-right: 8px;
+        padding-top: 12px;
+        display: flex;
+        .left-button {
+          margin-right: 24px;
+          color: #ffffff;
+          span {
+            display: inline-block;
+            margin-right: 3px;
+            margin-left: -2px;
+          }
+        }
+        .input-suffix-img {
+          border-left: 1px solid #ccc;
+          padding-left: 10px;
+        }
+        .right-button {
+          margin-left: 16px;
+          img {
+            width: 12px;
+            margin-right: 4px;
+            margin-top: -3px;
+          }
+        }
+      }
+    }
+    .bottom {
+      display: flex;
+      justify-content: space-between;
+      height: 59px;
+      line-height: 59px;
+      margin-left: 27px;
+      .left {
+        color: rgba(0, 0, 0, 0.65);
+        img {
+          width: 14px;
+          margin-right: 5px;
+        }
+        span:nth-child(2) {
+          margin: 0 2px;
+          color: #118eea;
+          font-weight: bold;
+        }
+        span:nth-child(3) {
+          color: rgba(0, 0, 0, 0.85);
+          font-weight: bold;
+        }
+      }
+      .submit-button {
+        margin-right: 16px;
+        color: rgba(0, 0, 0, 0.25);
+      }
+      .log-button {
+        margin-right: 24px;
+        color: rgba(0, 0, 0, 0.25);
+        img {
+          margin-left: 3px;
+          margin-top: -2px;
+        }
+      }
+    }
+  }
+  .ant-table {
+    .ant-table-button {
+      display: flex;
+      div {
+        color: #118eea;
+        cursor: pointer;
+        font-weight: 500;
+      }
+      div:first-child {
+        margin-right: 36px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .ant-table-wrap {
+    .ant-header {
+      .top {
+        .right {
+          display: none;
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 666px) {
+  .ant-table-wrap {
+    .ant-header {
+      display: none;
+    }
+  }
+}
