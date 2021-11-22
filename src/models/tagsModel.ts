@@ -1,9 +1,9 @@
 /*
  * @Author: ZY
  * @Date: 2021-10-25 13:42:43
- * @LastEditors: ZY
- * @LastEditTime: 2021-11-02 10:00:49
- * @FilePath: /main/src/models/tagsModel.ts
+ * @LastEditors: ZLL
+ * @LastEditTime: 2021-11-22 15:46:52
+ * @FilePath: \main\src\models\tagsModel.ts
  * @Description: dva tags
  * tabs 整理设计思路：
  * 需求：两种逻辑，一种是菜单功能，功能、路由、tag是一对一的关系，另一种单据类可以开多个
@@ -45,7 +45,7 @@ export interface TagsModelType {
  */
 const homeTag: Tag = {
   key: `/dashboard`,
-  title: '首页',
+  title: '我的单据',
   active: true,
   path: '/dashboard',
 };
