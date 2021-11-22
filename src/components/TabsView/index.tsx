@@ -1,9 +1,9 @@
 /*
  * @Author: ZY
  * @Date: 2021-11-01 15:55:26
- * @LastEditors: ZLL
- * @LastEditTime: 2021-11-04 17:08:42
- * @FilePath: \main\src\components\TabsView\index.tsx
+ * @LastEditors: ZY
+ * @LastEditTime: 2021-11-22 09:13:28
+ * @FilePath: /main/src/components/TabsView/index.tsx
  * @Description: 选项卡标签
  */
 
@@ -66,6 +66,7 @@ const IndexPage: React.FC<TabsViewProps> = (props) => {
       item.title = item.innerText;
     });
   }, [tags]);
+
   const tabOnEdit = (targetKey: React.MouseEvent | React.KeyboardEvent | string, action: 'add' | 'remove') => {
     if (action === 'remove') {
       dispatch({ type: 'tagsModel/removeTag', payload: targetKey });
