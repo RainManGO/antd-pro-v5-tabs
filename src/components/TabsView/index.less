@@ -6,20 +6,35 @@
   .tabsRightButton,
   .dropDownArrow {
     width: 40px;
-    height: 40px;
-    margin-right: 2px;
+    height: 37px;
     background-color: #fff;
-    background-image: url('../../../public/tabsLeft.png');
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .tabsRightButton,
+  .dropDownArrow {
+    border-left: 2px solid #f0f2f7;
+  }
+  .tabsLeftButtonImg,
+  .dropDownArrowImg,
+  .tabsRightButtonImg {
+    width: 16px;
+    height: 16px;
+    // background-image: url('../../../public/tabsLeft.png');
     background-repeat: no-repeat;
     background-position: center;
-    cursor: pointer;
+    background-size: cover;
   }
-
-  .tabsRightButton {
+  .tabsLeftButtonImg {
+    background-image: url('../../../public/tabsLeft.png');
+  }
+  .tabsRightButtonImg {
     background-image: url('../../../public/tabsRight.png');
   }
 
-  .dropDownArrow {
+  .dropDownArrowImg {
     background-image: url('../../../public/dropDownArrow.png');
   }
 
@@ -33,18 +48,24 @@
     }
 
     .ant-tabs-nav {
-      height: 40px;
+      height: 41px;
       padding-top: 3px;
       background: #fff;
     }
 
     .ant-tabs-card.ant-tabs-top > .ant-tabs-nav .ant-tabs-tab + .ant-tabs-tab {
-      margin-left: 0 !important;
       transition: none !important;
     }
     .ant-tabs-tab {
       color: rgba(0, 0, 0, 0.85);
       opacity: 0.85;
+    }
+
+    .ant-tabs-card > .ant-tabs-nav .ant-tabs-tab,
+    .ant-tabs-card > div > .ant-tabs-nav .ant-tabs-tab {
+      padding: 8px 16px 8px 16px;
+      margin-right: 10px;
+      // margin-left: 10px !important;
     }
 
     .ant-tabs-card > .ant-tabs-nav .ant-tabs-tab {
@@ -62,7 +83,10 @@
       box-shadow: 8px 23px 0 0 #edf0f5, -7px 23px 0 0 #edf0f5;
       opacity: 0.85;
     }
-
+    .ant-tabs-card > .ant-tabs-nav .ant-tabs-tab,
+    .ant-tabs-card > div > .ant-tabs-nav .ant-tabs-tab {
+      transition: none;
+    }
     .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
       color: #000;
     }
@@ -101,6 +125,15 @@
       text-overflow: ellipsis;
       word-break: keep-all;
       transition: none;
+    }
+
+    .ant-tabs-extra-content {
+      display: flex;
+    }
+    .ant-tabs-nav-wrap {
+      padding-left: 10px;
+      // padding-right: 10px;
+      height: 37px;
     }
   }
 }

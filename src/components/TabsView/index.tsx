@@ -2,7 +2,7 @@
  * @Author: ZY
  * @Date: 2021-11-01 15:55:26
  * @LastEditors: ZLL
- * @LastEditTime: 2021-11-04 17:08:42
+ * @LastEditTime: 2021-11-19 13:51:48
  * @FilePath: \main\src\components\TabsView\index.tsx
  * @Description: 选项卡标签
  */
@@ -99,12 +99,14 @@ const IndexPage: React.FC<TabsViewProps> = (props) => {
   // tabs 点击左箭头
   const clickTabsLeftBtn = () => {
     const tabsNavListWidth = (document.getElementsByClassName('ant-tabs-nav-list')[0] as any).offsetWidth;
-    const tabsNavWidth = (document.getElementsByClassName('ant-tabs-nav')[0] as any).offsetWidth;
+    const tabsNavWidth = (document.getElementsByClassName('ant-tabs-nav-wrap')[0] as any).offsetWidth;
     const strData = getDomTransformData();
-    console.log(strData, tabsNavListWidth);
+    console.log(strData, tabsNavListWidth, tabsNavWidth);
+    console.log('qqq', tabsNavListWidth - (Math.abs(strData) + tabsNavWidth));
+
     if (tabsNavListWidth - (Math.abs(strData) + tabsNavWidth) < 200 && tabsNavListWidth >= tabsNavWidth) {
       (document.getElementsByClassName('ant-tabs-nav-list')[0] as any).style.transform = `translate(${
-        Number(strData) - (tabsNavListWidth - (Math.abs(strData) + tabsNavWidth))
+        Number(strData) - (tabsNavListWidth - (Math.abs(strData) + tabsNavWidth) + 20)
       }px, 0px)`;
     }
     // if (Math.abs(strData)+ tabsNavWidth + 100<tabsNavListWidth&&tabsNavListWidth>=tabsNavWidth) {
@@ -132,16 +134,47 @@ const IndexPage: React.FC<TabsViewProps> = (props) => {
       (document.getElementsByClassName('ant-tabs-nav-list')[0] as any).style.transform = `translate(0px, 0px)`;
     }
   };
-
+  const onTabClick = (key: any, event: any) => {
+    console.log('key', key, event);
+  };
   return (
     <div className={styles.tabsBox}>
-      <div
-        className={styles.tabsLeftButton}
-        onClick={() => {
-          clickTabsLeftBtn();
+      <Tabs
+        activeKey={activeKey}
+        type="editable-card"
+        hideAdd={true}
+        onEdit={tabOnEdit}
+        onChange={tabOnChange}
+        onTabClick={onTabClick}
+        tabBarExtraContent={{
+          left: (
+            <div
+              className={styles.tabsLeftButton}
+              onClick={() => {
+                clickTabsLeftBtn();
+              }}
+            >
+              <div className={styles.tabsLeftButtonImg} />
+            </div>
+          ),
+          right: (
+            <>
+              <div
+                className={styles.tabsRightButton}
+                onClick={() => {
+                  clickTabsRightBtn();
+                }}
+              >
+                <div className={styles.tabsRightButtonImg} />
+              </div>
+              <div className={styles.dropDownArrow}>
+                <div className={styles.dropDownArrowImg} />
+              </div>
+            </>
+          ),
         }}
-      />
-      <Tabs activeKey={activeKey} type="editable-card" hideAdd={true} onEdit={tabOnEdit} onChange={tabOnChange}>
+        tabBarGutter={2}
+      >
         {tags.length &&
           tags.map((tag) => {
             return (
@@ -151,13 +184,6 @@ const IndexPage: React.FC<TabsViewProps> = (props) => {
             );
           })}
       </Tabs>
-      <div
-        className={styles.tabsRightButton}
-        onClick={() => {
-          clickTabsRightBtn();
-        }}
-      />
-      <div className={styles.dropDownArrow} />
     </div>
   );
 };
