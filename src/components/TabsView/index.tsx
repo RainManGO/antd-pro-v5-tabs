@@ -2,7 +2,7 @@
  * @Author: ZY
  * @Date: 2021-11-01 15:55:26
  * @LastEditors: ZLL
- * @LastEditTime: 2021-11-19 13:51:48
+ * @LastEditTime: 2021-11-22 09:53:36
  * @FilePath: \main\src\components\TabsView\index.tsx
  * @Description: 选项卡标签
  */
@@ -25,6 +25,7 @@ const { TabPane } = Tabs;
 
 const IndexPage: React.FC<TabsViewProps> = (props) => {
   const { tags, activeKey, dispatch, route } = props;
+  console.log(tags);
 
   useEffect(() => {
     const getTitleFromRoute = (path: string) => {
@@ -85,6 +86,7 @@ const IndexPage: React.FC<TabsViewProps> = (props) => {
       }
       return t.path === path;
     })[0];
+
     return (r as any).component;
   };
 

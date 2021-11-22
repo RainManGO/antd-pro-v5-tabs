@@ -16,7 +16,7 @@ const Alphabetize: React.FC<{
 
   const items = data.map((item, index) => {
     navRightArr.push(
-      <li>
+      <li key={index}>
         <a href={`#${item.class}`}>{item.class}</a>
       </li>,
     );

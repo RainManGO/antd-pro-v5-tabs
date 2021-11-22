@@ -7,8 +7,14 @@
  * @Description: 文件描述
  */
 import React from 'react';
+import './index.less';
+import TableAntPro from '@/components/TableList';
 
 const IndexPage: React.FC<{}> = () => {
-  return <div>xxx</div>;
+  return (
+    <div className="table-list">
+      <TableAntPro />
+    </div>
+  );
 };
 export default IndexPage;

@@ -38,8 +38,6 @@ interface LayoutsType extends ProLayoutProps {
 }
 
 const IndexPage: ConnectRC<LayoutsType> = (props) => {
-  console.log('props', props);
-
   const [settings, setSetting] = useState<Partial<ProSettings> | undefined>({ fixSiderbar: true });
   const [collapsed, setCollapsed] = useState(false);
   const [theme, setTheme] = useState(localStorage.getItem('selectedTheme') ?? 'black');
@@ -55,8 +53,9 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
 
   useEffect(() => {
     onresize = () => {
-      document.body.offsetWidth < 1000 && setCollapsed(true);
-      document.body.offsetWidth > 1000 && setCollapsed(false);
+      const getOffsetWidth = document.body.offsetWidth;
+      getOffsetWidth < 1000 && setCollapsed(true);
+      getOffsetWidth > 1000 && setCollapsed(false);
     };
   }, []);
 
@@ -72,7 +71,13 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
   const customNavData = [
     {
       title: '采购报销',
-      items: ['费用报销单1', '功能名称功能名称5', '功能名称功能名称2', '功能名称功能名称3', '功能名称功能名称4'],
+      items: [
+        '费用报销单费用报销单1',
+        '功能名称功能名称5',
+        '功能名称功能名称2',
+        '功能名称功能名称3',
+        '功能名称功能名称4',
+      ],
     },
     {
       title: '商旅服务',
@@ -131,6 +136,14 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
         height: '100vh',
       }}
     >
+      {!collapsed && document.body.offsetWidth <= 768 && !open.AllFunction && !open.MakeList && (
+        <div
+          className="mask"
+          onClick={() => {
+            setCollapsed(!collapsed);
+          }}
+        />
+      )}
       <ProLayout
         {...settings}
         {...layoutDefaultSettings}
@@ -139,7 +152,7 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
           return (
             <div
               className={`menu-logo ${collapsed ? 'closed' : 'open'} ${
-                document.body.offsetWidth < 765 ? 'hiddenLogo' : ''
+                document.body.offsetWidth < 765 ? `hiddenLogo fix-header` : ''
               }`}
             >
               <img src={logoImg} alt="logo未加载" />
@@ -171,9 +184,16 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
               <div className="zhidan">
                 <div
                   className={`position ${menu.collapsed ? 'closed' : 'open'}`}
-                  onClick={() => {
+                  onMouseEnter={() => {
                     setOpen({
-                      MakeList: !open.MakeList,
+                      MakeList: true,
+                      CustomNav: false,
+                      AllFunction: false,
+                    });
+                  }}
+                  onMouseLeave={() => {
+                    setOpen({
+                      MakeList: false,
                       CustomNav: false,
                       AllFunction: false,
                     });
@@ -182,7 +202,23 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
                   <img src={addPrepareImg} alt="加载失败..." />
                   {!menu.collapsed && <p>我要制单</p>}
                 </div>
-                <div className={`makelist-nav ${menu?.collapsed ? 'closed' : 'open'}`}>
+                <div
+                  className={`makelist-nav ${menu?.collapsed ? 'closed' : 'open'}`}
+                  onMouseLeave={() => {
+                    setOpen({
+                      MakeList: false,
+                      CustomNav: false,
+                      AllFunction: false,
+                    });
+                  }}
+                  onMouseEnter={() => {
+                    setOpen({
+                      MakeList: true,
+                      CustomNav: false,
+                      AllFunction: false,
+                    });
+                  }}
+                >
                   <MakeList data={111} />
                 </div>
               </div>
@@ -190,20 +226,45 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
               <div className={`all-function ${menu?.collapsed ? 'closed' : 'open'}`}>
                 <div
                   className="position"
-                  onClick={() => {
+                  onMouseEnter={() => {
                     setOpen({
                       MakeList: false,
                       CustomNav: false,
-                      AllFunction: !open.AllFunction,
+                      AllFunction: true,
+                    });
+                  }}
+                  onMouseLeave={() => {
+                    setOpen({
+                      MakeList: false,
+                      CustomNav: false,
+                      AllFunction: false,
                     });
                   }}
                 >
                   <img src={bottomMenuNavImg} alt="加载失败..." />
-                  {!menu?.collapsed && '全部功能'}
+                  {!menu?.collapsed && <p>全部功能</p>}
                 </div>
-                <div className={`allfunction-nav ${menu?.collapsed ? 'closed' : 'open'}`}>
-                  <AllFunction data={111} />
-                </div>
+                {open.AllFunction && (
+                  <div
+                    className={`allfunction-nav ${menu?.collapsed ? 'closed' : 'open'}`}
+                    onMouseLeave={() => {
+                      setOpen({
+                        MakeList: false,
+                        CustomNav: false,
+                        AllFunction: false,
+                      });
+                    }}
+                    onMouseEnter={() => {
+                      setOpen({
+                        MakeList: false,
+                        CustomNav: false,
+                        AllFunction: true,
+                      });
+                    }}
+                  >
+                    <AllFunction data={111} />
+                  </div>
+                )}
               </div>
             </div>
           );
