@@ -1,4 +1,5 @@
 .ant-table-wrap {
+  height: 100%;
   .ant-header {
     .top {
       display: flex;
@@ -91,7 +92,20 @@
       }
     }
   }
-  .ant-table {
+  .ant-table-custom {
+    height: calc(100% - 120px);
+    .identification {
+      img {
+        width: 13px;
+        margin-right: 4px;
+      }
+    }
+    .billsNumber {
+      color: rgba(17, 142, 234, 1);
+    }
+    .amount {
+      font-weight: bold;
+    }
     .ant-table-button {
       display: flex;
       div {

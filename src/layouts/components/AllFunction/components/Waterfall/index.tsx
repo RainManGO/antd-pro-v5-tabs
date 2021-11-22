@@ -48,7 +48,6 @@ const Waterfall: React.FC<{
       const setNewColums = Math.floor(window.innerWidth / 340);
       setColums(setNewColums);
     });
-    console.log(colums);
 
     const nextTops = new Array<number>(colums); // 数组的长度初始化为列数的个数
     nextTops.fill(0); // 将数组的每一项填充为 0

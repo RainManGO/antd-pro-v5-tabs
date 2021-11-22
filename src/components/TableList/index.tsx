@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Table, Input } from 'antd';
 import './index.less';
 import PlusOutlined from '@ant-design/icons/lib/icons/PlusOutlined';
@@ -7,10 +7,12 @@ import lianheImg from '@/assets/lianhe.png';
 import shuaxinImg from '@/assets/shuaxin.png';
 import dropDownArrowImg from '@/assets/dropDownArrow.png';
 import ShapeImg from '@/assets/Shape.png';
+import jiajiImg from '@/assets/identification-jiaji.png';
 
 export default function TableShare() {
   const [selectionType, setSelectionType] = useState<'checkbox' | 'radio'>('checkbox');
   const [select, setSelect] = useState(1);
+  const [scrollHeight, setScrollHeight] = useState(300);
   const columns = [
     {
       title: '序号',
@@ -19,11 +21,24 @@ export default function TableShare() {
     },
     {
       title: '标识',
-      dataIndex: 'biaoshi',
+      dataIndex: 'identification',
+      render: (text: string) => {
+        return (
+          <div className="identification">
+            <img src={jiajiImg} alt="加载失败..." />
+            {text}
+          </div>
+        );
+      },
     },
     {
       title: '单据编号',
-      dataIndex: 'danjubianhao',
+      dataIndex: 'billsNumber',
+      render: (text: string) => {
+        console.log(text);
+
+        return <div className="billsNumber">{text}</div>;
+      },
     },
     {
       title: '单据类型',
@@ -31,7 +46,10 @@ export default function TableShare() {
     },
     {
       title: '金额',
-      dataIndex: 'jine',
+      dataIndex: 'amount',
+      render: (number: number) => {
+        return <div className="amount">{number}</div>;
+      },
     },
     {
       title: '业务事由',
@@ -65,93 +83,128 @@ export default function TableShare() {
   const data = [
     {
       key: '1',
-      index: 'John Brown',
-      biaoshi: '加急',
-      danjubianhao: 'BX1002202110110001',
+      index: 1,
+      identification: '加急',
+      billsNumber: 'BX1002202110110001',
       leixing: '业务招待费报销单',
-      jine: '999.99',
+      amount: '999.99',
       shiyou: '业务事由业务事由业务事由',
       shijian: '2021-10-28 10:55',
       chaozuo: '随便',
     },
     {
-      key: '1',
-      index: 'John Brown',
-      biaoshi: '加急',
-      danjubianhao: 'BX1002202110110001',
+      key: '2',
+      index: 2,
+      identification: '加急',
+      billsNumber: 'BX1002202110110001',
       leixing: '业务招待费报销单',
-      jine: '999.99',
+      amount: '999.99',
       shiyou: '业务事由业务事由业务事由',
       shijian: '2021-10-28 10:55',
       chaozuo: '随便',
     },
     {
-      key: '1',
-      index: 'John Brown',
-      biaoshi: '加急',
-      danjubianhao: 'BX1002202110110001',
+      key: '3',
+      index: 3,
+      identification: '加急',
+      billsNumber: 'BX1002202110110001',
       leixing: '业务招待费报销单',
-      jine: '999.99',
+      amount: '999.99',
       shiyou: '业务事由业务事由业务事由',
       shijian: '2021-10-28 10:55',
       chaozuo: '随便',
     },
     {
-      key: '1',
-      index: 'John Brown',
-      biaoshi: '加急',
-      danjubianhao: 'BX1002202110110001',
+      key: '4',
+      index: 4,
+      identification: '加急',
+      billsNumber: 'BX1002202110110001',
       leixing: '业务招待费报销单',
-      jine: '999.99',
+      amount: '999.99',
       shiyou: '业务事由业务事由业务事由',
       shijian: '2021-10-28 10:55',
       chaozuo: '随便',
     },
     {
-      key: '1',
-      index: 'John Brown',
-      biaoshi: '加急',
-      danjubianhao: 'BX1002202110110001',
+      key: '5',
+      index: 5,
+      identification: '加急',
+      billsNumber: 'BX1002202110110001',
       leixing: '业务招待费报销单',
-      jine: '999.99',
+      amount: '999.99',
       shiyou: '业务事由业务事由业务事由',
       shijian: '2021-10-28 10:55',
       chaozuo: '随便',
     },
     {
-      key: '1',
-      index: 'John Brown',
-      biaoshi: '加急',
-      danjubianhao: 'BX1002202110110001',
+      key: '6',
+      index: 6,
+      identification: '加急',
+      billsNumber: 'BX1002202110110001',
       leixing: '业务招待费报销单',
-      jine: '999.99',
+      amount: '999.99',
       shiyou: '业务事由业务事由业务事由',
       shijian: '2021-10-28 10:55',
       chaozuo: '随便',
     },
     {
-      key: '1',
-      index: 'John Brown',
-      biaoshi: '加急',
-      danjubianhao: 'BX1002202110110001',
+      key: '7',
+      index: 7,
+      identification: '加急',
+      billsNumber: 'BX1002202110110001',
       leixing: '业务招待费报销单',
-      jine: '999.99',
+      amount: '999.99',
       shiyou: '业务事由业务事由业务事由',
       shijian: '2021-10-28 10:55',
       chaozuo: '随便',
     },
     {
-      key: '1',
-      index: 'John Brown',
-      biaoshi: '加急',
-      danjubianhao: 'BX1002202110110001',
+      key: '8',
+      index: 8,
+      identification: '加急',
+      billsNumber: 'BX1002202110110001',
       leixing: '业务招待费报销单',
-      jine: '999.99',
+      amount: '999.99',
+      shiyou: '业务事由业务事由业务事由',
+      shijian: '2021-10-28 10:55',
+      chaozuo: '随便',
+    },
+    {
+      key: '9',
+      index: 9,
+      identification: '加急',
+      billsNumber: 'BX1002202110110001',
+      leixing: '业务招待费报销单',
+      amount: '999.99',
+      shiyou: '业务事由业务事由业务事由',
+      shijian: '2021-10-28 10:55',
+      chaozuo: '随便',
+    },
+    {
+      key: '10',
+      index: 10,
+      identification: '加急',
+      billsNumber: 'BX1002202110110001',
+      leixing: '业务招待费报销单',
+      amount: '999.99',
       shiyou: '业务事由业务事由业务事由',
       shijian: '2021-10-28 10:55',
       chaozuo: '随便',
     },
   ];
+
+  const listenerTableHeight = () => {
+    // 首次进入组件时初始化
+    const tableCustom = document.documentElement.getElementsByClassName('ant-table-custom')[0];
+    setScrollHeight(tableCustom.clientHeight - 100);
+    window.addEventListener('resize', () => {
+      setScrollHeight(tableCustom.clientHeight - 100);
+    });
+  };
+
+  useEffect(() => {
+    listenerTableHeight();
+  }, []);
 
   // rowSelection object indicates the need for row selection
   const rowSelection = {
@@ -185,7 +238,7 @@ export default function TableShare() {
                 }}
               >
                 <span>待协同</span>
-                <span>6</span>
+                <span style={{ color: 'rgba(255, 96, 16, 1)' }}>6</span>
               </dd>
               <dd
                 className={`${select === 3 && 'active'}`}
@@ -194,7 +247,7 @@ export default function TableShare() {
                 }}
               >
                 <span>已退回</span>
-                <span>2</span>
+                <span style={{ color: 'rgba(255, 96, 16, 1)' }}>2</span>
               </dd>
               <dd
                 className={`${select === 4 && 'active'}`}
@@ -265,14 +318,18 @@ export default function TableShare() {
           </div>
         </div>
       </div>
-      <div className="ant-table">
+      <div className="ant-table-custom">
         <Table
           rowSelection={{
             type: selectionType,
             ...rowSelection,
           }}
+          scroll={{
+            y: scrollHeight,
+          }}
+          size="small"
           columns={columns}
-          dataSource={data}
+          dataSource={[...data, ...data, ...data, ...data, ...data, ...data, ...data, ...data, ...data]}
         />
       </div>
     </div>
