@@ -33,7 +33,7 @@
     "config/**/*",
     "typings.d.ts",
     ".eslintrc.js",
-    ".stylelintrc.json",
+    ".stylelintrc.js",
     ".prettierrc.js",
     "jest.config.js",
     "typings.d.ts",

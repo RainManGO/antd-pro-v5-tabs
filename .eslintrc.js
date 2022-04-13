@@ -2,12 +2,12 @@
  * @Author: ZY
  * @Date: 2021-10-28 14:19:21
  * @LastEditors: ZY
- * @LastEditTime: 2021-11-09 16:35:23
+ * @LastEditTime: 2022-04-13 14:56:58
  * @FilePath: /main/.eslintrc.js
  * @Description: 文件描述
  */
 module.exports = {
-  extends: ['alloy', 'alloy/react', 'alloy/typescript', 'plugin:prettier/recommended'],
+  extends: ['alloy', 'alloy/react', 'alloy/typescript'],
   env: {
     // 你的环境变量（包含多个预定义的全局变量）
     //
