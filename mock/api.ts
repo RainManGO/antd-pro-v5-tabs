@@ -1,9 +1,9 @@
 /*
  * @Author: ZY
  * @Date: 2021-07-21 14:36:44
- * @LastEditors: ZLL
- * @LastEditTime: 2021-11-04 11:10:23
- * @FilePath: \main\mock\api.ts
+ * @LastEditors: ZY
+ * @LastEditTime: 2022-06-21 16:05:59
+ * @FilePath: /main/mock/api.ts
  * @Description: menu mock
  */
 export default {
@@ -28,25 +28,25 @@ export default {
       hidden: 'true',
       access: 'canReadAdmin',
     },
-    {
-      path: '/rd',
-      name: '研发中心',
-      icon: 'icon-facebook',
-      children: [
-        {
-          path: '/rd/rdCenter',
-          name: '研发中台首页',
-          icon: 'icon-facebook',
-          microApp: 'rdCenter',
-        },
-        {
-          path: '/rd/rdDynamic',
-          name: '研发中台动态路由页面',
-          icon: 'icon-facebook',
-          microApp: 'rdCenter',
-        },
-      ],
-    },
+    // {
+    //   path: '/rd',
+    //   name: '研发中心',
+    //   icon: 'icon-facebook',
+    //   children: [
+    //     {
+    //       path: '/rd/rdCenter',
+    //       name: '研发中台首页',
+    //       icon: 'icon-facebook',
+    //       microApp: 'rdCenter',
+    //     },
+    //     {
+    //       path: '/rd/rdDynamic',
+    //       name: '研发中台动态路由页面',
+    //       icon: 'icon-facebook',
+    //       microApp: 'rdCenter',
+    //     },
+    //   ],
+    // },
     {
       path: '/test1',
       name: '测试111',

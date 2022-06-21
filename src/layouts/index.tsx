@@ -2,7 +2,7 @@
  * @Author: ZY
  * @Date: 2021-07-21 11:58:40
  * @LastEditors: ZY
- * @LastEditTime: 2021-11-22 09:23:45
+ * @LastEditTime: 2022-06-21 16:05:12
  * @FilePath: /main/src/layouts/index.tsx
  * @Description: 布局入口文件
  */
@@ -22,7 +22,6 @@ import blackTheme from '@/themes/blackTheme';
 import '@/themes/theme.less';
 // 导入图标
 import logoImg from '@/assets/logo.png';
-import logoFontImg from '@/assets/logoFont.png';
 import addPrepareImg from '@/assets/addPrepare.png';
 import bottomMenuNavImg from '@/assets/bottomMenuNav.png';
 // 导入组件
@@ -155,8 +154,8 @@ const IndexPage: ConnectRC<LayoutsType> = (props) => {
                 document.body.offsetWidth < 765 ? `hiddenLogo fix-header` : ''
               }`}
             >
-              <img src={logoImg} alt="logo未加载" />
-              {!collapsed && <img src={logoFontImg} alt="logo未加载" />}
+              {/* <img src={logoImg} alt="logo未加载" /> */}
+              {/* {!collapsed && <img src={logoFontImg} alt="logo未加载" />} */}
             </div>
           );
         }}
